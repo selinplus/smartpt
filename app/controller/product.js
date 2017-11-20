@@ -7,7 +7,8 @@ class ProductController extends Controller {
   async list() {
     const { ctx, service } = this;
     // const { id } = ctx.request.query;
-    const result = await service.product.getlist();
+    const result = await service.product.list();
+    const { name:text,  } = result;
     ctx.body = result;
     // return result;
   }

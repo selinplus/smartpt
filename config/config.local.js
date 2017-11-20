@@ -26,6 +26,7 @@ module.exports = config => {
       corpid: 'ding83527a7c6cc1647635c2f4657eb6378f',
       corpsecret: 'mi6Iot2PRr0niD8ufCnMjfDKx4oBYLWeF8PHuBseeABD8sBFLQJAcKjlqWaBEEcr',
     },
+    limit: 10,
   };
 };
 

@@ -4,10 +4,7 @@
 const Service = require('egg').Service;
 
 class CustomerService extends Service {
-  async list() {
-    const ctx = this.ctx;
-    const { limit, page } = Object.assign(this.ctx.request.query, { limit: 10, page: 1 });
-    const user_id = ctx.session.user_id || this.app.config.user_id;
+  async list(user_id, limit, page) {
     const result = await this.app.mysql.select('customer', {
       where: { user_id },
       order: [ 'create_time', 'desc' ],
@@ -15,6 +12,10 @@ class CustomerService extends Service {
       offset: limit * (page - 1),
     });
     return result;
+  }
+  async add(body) {
+    const result = await this.app.mysql.insert('customer', body);
+    return { success: result.affectedRows === 1 };
   }
 }
 

@@ -8,8 +8,8 @@ class ProductController extends Controller {
     const { ctx, service } = this;
     // const { id } = ctx.request.query;
     const result = await service.product.list();
-    const { name:text,  } = result;
-    ctx.body = result;
+    const ire = ctx.helper.nameToText(result);
+    ctx.body = ire;
     // return result;
   }
 }

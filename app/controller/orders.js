@@ -12,6 +12,13 @@ class OrdersController extends Controller {
     const resultOrders = await service.orders.add(body);
     return resultCustomer === 1 && resultOrders === 1;
   }
+  async list() {
+    const { ctx, session, service, app } = this;
+    const { user_id = app.config.user_id } = session || {};
+    const { limit = app.config.limit, page = 1 } = ctx.query;
+    const result = await service.orders.list(user_id, limit, page);
+    ctx.body = result;
+  }
 }
 
 module.exports = OrdersController;

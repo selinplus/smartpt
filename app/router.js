@@ -6,8 +6,8 @@ module.exports = app => {
   app.get('/product/list', app.controller.product.list);
   app.post('/customer/add', app.controller.customer.add);
   app.get('/customer/list', app.controller.customer.list);
-  // app.post('/order/add', app.controller.order.add);
-
+  app.post('/orders/add', app.controller.orders.add);
+  app.get('/orders/list', app.controller.orders.list);
   // dingTalk according
   app.get('/dingtalk/userlist', app.controller.dingtalk.userList);
 };

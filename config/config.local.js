@@ -1,7 +1,7 @@
 /* eslint linebreak-style: ["error", "windows"]*/
 'use strict';
 
-module.exports = config => {
+module.exports = () => {
   return {
     mysql: {
       // 单数据库信息配置
@@ -25,6 +25,7 @@ module.exports = config => {
     dingtalk: {
       corpid: 'ding83527a7c6cc1647635c2f4657eb6378f',
       corpsecret: 'mi6Iot2PRr0niD8ufCnMjfDKx4oBYLWeF8PHuBseeABD8sBFLQJAcKjlqWaBEEcr',
+      assist_noncestr: 'Gen911@Inue',
     },
     limit: 10,
   };

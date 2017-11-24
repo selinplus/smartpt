@@ -10,6 +10,9 @@ module.exports = appInfo => {
   config.middleware = [];
   config.view = {
     defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.njk': 'nunjucks',
+    },
   };
   // test user_id for dingtalk
   config.user_id = 'test1';

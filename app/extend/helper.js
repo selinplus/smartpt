@@ -6,3 +6,4 @@ exports.nameToText = objArray => Object.keys(objArray).map(key => {
   delete objArray[key].name;
   return objArray[key];
 });
+

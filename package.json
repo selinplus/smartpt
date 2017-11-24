@@ -9,6 +9,7 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.1.0",
     "egg-view-nunjucks": "^2.1.4",
+    "vue": "^2.4.4",
     "help": "^3.0.2"
   },
   "devDependencies": {
@@ -19,7 +20,18 @@
     "egg-mock": "^3.13.0",
     "eslint": "^4.10.0",
     "eslint-config-egg": "^5.1.0",
-    "webstorm-disable-index": "^1.2.0"
+    "webstorm-disable-index": "^1.2.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   },
   "engines": {
     "node": ">=8.9.0"
@@ -28,6 +40,8 @@
     "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
+    "dev-webpack": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",

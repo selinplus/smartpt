@@ -5,9 +5,9 @@ const Controller = require('egg').Controller;
 
 class DingtalkController extends Controller {
   * userList() {
-    const result = yield this.app.dingtalk.user.list('40660078', true);
-    const res = JSON.stringify(result);
-    this.ctx.body = res;
+    const res = yield this.app.dingtalk.user.list('40660078', true);
+    const result = JSON.stringify(res);
+    return this.ctx.encaptulate(result);
   }
 
   /**

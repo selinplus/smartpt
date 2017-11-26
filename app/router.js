@@ -1,5 +1,4 @@
-/* eslint linebreak-style: ["error", "windows"]*/
-'use strict';
+
 
 module.exports = app => {
   app.get('/', app.controller.home.index);

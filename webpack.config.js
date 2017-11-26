@@ -1,87 +1,91 @@
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
+const entry = { home: './frontend/home/home.js' };
 module.exports = {
-    entry: './frontend/main.js',
-    output: {
-        path: path.resolve(__dirname, './app/view'),
-        publicPath: path.resolve(__dirname, './app/public/static'),
-        filename: '[name].build.js'
-    },
-    module: {
-        rules: [
-            {
-                test: /\.css$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader'
-                ],
-            }, {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                    }
-                    // other vue-loader options go here
-                }
-            },
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/
-            },
-            // 字体icon文件的loader
-            {
-                test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
-                loader: 'file-loader',
-            },
-            {
-                test: /\.(png|jpg|gif|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]?[hash]'
-                }
-            }
-        ]
-    },
-    resolve: {
-        alias: {
-            'vue$': 'vue/dist/vue.esm.js'
+  entry,
+  output: {
+    path: path.resolve(__dirname, './app/public/dist/'),
+    publicPath: 'public/dist/',
+    filename: '[name].build.js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+        ],
+      }, {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+          },
+          // other vue-loader options go here
         },
-        extensions: ['*', '.js', '.vue', '.json']
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      // 字体icon文件的loader
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]',
+        },
+      },
+    ],
+  },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue',
+      utils: path.resolve(__dirname, './utils'),
     },
-    devServer: {
-        historyApiFallback: true,
-        noInfo: true,
-        overlay: true
-    },
-    performance: {
-        hints: false
-    },
-    devtool: '#eval-source-map'
-}
+    extensions: [ '*', '.js', '.vue', '.json' ],
+  },
+  devServer: {
+    historyApiFallback: true,
+    noInfo: false,
+    inline: true,
+    port: 9000,
+    hot: true,
+    // use these host for proxy use
+    host: '0.0.0.0',
+    contentBase: './app/public',
+  },
+  performance: {
+    hints: false,
+  },
+  devtool: '#eval-source-map',
+};
 
 if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-    // http://vue-loader.vuejs.org/en/workflow/production.html
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        }),
-        new HtmlWebpackPlugin({
-            filename: path.join(__dirname, '../app/view/index.njk'),
-            template: path.join(__dirname, '../app/view/template.njk'),
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
-        })
-    ])
+  console.log('生产环境');
+  module.exports.devtool = '#source-map';
+  // http://vue-loader.vuejs.org/en/workflow/production.html
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"',
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+    }),
+  ]);
 }

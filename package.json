@@ -9,8 +9,9 @@
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.1.0",
     "egg-view-nunjucks": "^2.1.4",
-    "vue": "^2.4.4",
-    "help": "^3.0.2"
+    "iview": "^2.7.3",
+    "koa-proxy": "^0.9.0",
+    "vue": "^2.4.4"
   },
   "devDependencies": {
     "autod": "^2.10.0",
@@ -39,8 +40,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop",
-    "dev": "egg-bin dev",
-    "dev-webpack": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot & egg-bin dev",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
@@ -58,5 +58,45 @@
     "url": "https://github.com/selinplus/smartpt.git"
   },
   "author": "selinplus",
-  "license": "MIT"
+  "license": "MIT",
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "rules": {
+      "indent": [
+        2,
+        4
+      ],
+      "quotes": [
+        2,
+        "single"
+      ],
+      "linebreak-style": [
+        2,
+        "windows"
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
+      "no-trailing-spaces": 2,
+      "space-before-function-paren": [
+        2,
+        "always"
+      ],
+      "eqeqeq": [
+        2,
+        "allow-null"
+      ],
+      "no-console": 0,
+      "no-cond-assign": 0,
+      "no-extra-boolean-cast": 0,
+      "no-unused-vars": 0
+    },
+    "env": {
+      "browser": true,
+      "node": true,
+      "es6": true
+    },
+    "extends": "eslint:recommended"
+  }
 }

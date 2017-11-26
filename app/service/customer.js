@@ -1,6 +1,3 @@
-/* eslint linebreak-style: ["error", "windows"]*/
-'use strict';
-
 const Service = require('egg').Service;
 
 class CustomerService extends Service {

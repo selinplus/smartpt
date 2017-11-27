@@ -2,9 +2,9 @@
 
 module.exports = {
   // 显示环境变量
-  showEnv() {
+  showEnv(msg) {
     if (process.env.NODE_ENV === 'development') {
-      console.info('现在是开发模式');
+      console.info(msg);
     }
   },
 };

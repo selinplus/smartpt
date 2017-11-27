@@ -48,9 +48,11 @@ module.exports = {
   resolve: {
     alias: {
       vue: 'vue/dist/vue',
+      iv: 'iview/dist/',
+      // iviewcss: 'iview/dist/styles/',
       utils: path.resolve(__dirname, './utils'),
     },
-    extensions: [ '*', '.js', '.vue', '.json' ],
+    extensions: [ '*', '.js', '.vue', '.json', '.css' ],
   },
   devServer: {
     historyApiFallback: true,

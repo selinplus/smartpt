@@ -3,6 +3,7 @@
 module.exports = app => {
   app.get('/', app.controller.home.index);
   app.get('/product/list', app.controller.product.list);
+  app.get('/product/query', app.controller.product.query);
   app.post('/customer/add', app.controller.customer.add);
   app.get('/customer/list', app.controller.customer.list);
   app.post('/orders/add', app.controller.orders.add);

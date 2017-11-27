@@ -7,5 +7,12 @@
             }
         ],
         "stage-3"
+    ],
+    "plugins": [
+      ["import", {
+        "libraryName": "iview",
+        "libraryDirectory": "src/components"
+      }]
     ]
+
 }

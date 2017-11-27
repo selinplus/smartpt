@@ -41,7 +41,8 @@
   "scripts": {
     "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot & egg-bin dev",
+    "webpack-dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
+    "dev": "egg-bin dev",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",

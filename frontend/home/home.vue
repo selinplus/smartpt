@@ -1,23 +1,23 @@
 <template>
     <div>
-        <Header></Header>
-        <Product></Product>
-        <Footer></Footer>
+        <Pageheader></Pageheader>
+        <Customer></Customer>
+        <Pagefooter></Pagefooter>
     </div>
 </template>
 <script>
-import Product from '../component/product.vue';
-import PageFooter from '../component/footer.vue';
-import PageHeader from '../component/header.vue';
+import Customer from '../component/customer.vue';
+import Pagefooter from '../component/pagefooter.vue';
+import Pageheader from '../component/pageheader.vue';
 
 export default {
   name: 'app',
   data () {
     return{
-        user_id: 'test1',
+        userId: 'test1',
         message: 'hello jing!'
     }
   },
-  components: { PageHeader, Product, PageFooter },
+  components: { Pageheader, Customer, Pagefooter },
 }
 </script>

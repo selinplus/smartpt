@@ -15,6 +15,17 @@ class CustomerController extends Controller {
     const result = await service.customer.add(body);
     this.ctx.encapsulateCreate(result);
   }
+  async query() {
+    const { ctx, service } = this;
+    const { keyword = '', userId = 'test1' } = ctx.query;
+    const result = await service.customer.query(keyword, userId);
+    console.log('------------------');
+    console.log(typeof result);
+    console.log(result.length);
+    console.log(result);
+    console.log('-------------------');
+    ctx.body = result;
+  }
 }
 
 module.exports = CustomerController;

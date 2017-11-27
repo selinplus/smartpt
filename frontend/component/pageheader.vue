@@ -18,18 +18,17 @@
             return {
                 username: 'ajing'
             }
-        },
-        components:{},
+        }
     }
 </script>
 
 <style scoped>
     .header-bar{
-        position: fixed;
         top:0px;
         padding: 13 5;
-        padding-bottom: 10 #333;
+        width: 100%;
         background-color: blueviolet;
+        box-shadow: 0 0 5 rgba(30, 20, 10, 0.6);
         min-height: 40px;
     }
     .brand{

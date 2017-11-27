@@ -71,7 +71,7 @@ module.exports = {
 };
 
 if (process.env.NODE_ENV === 'production') {
-  console.log('生产环境');
+  console.log('开发环境');
   module.exports.devtool = '#source-map';
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([

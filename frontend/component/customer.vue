@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="picker">
         <AutoComplete
             v-model="customerId"
             @on-search="handleSearch"
@@ -15,7 +15,7 @@
         data() {
             return {
                 userId: 'test1',
-                customerId: '',
+                customerId: '1',
                 datainfo:[],
             }
         },
@@ -37,5 +37,7 @@
 </script>
 
 <style scoped>
-
+    .picker{
+        padding: 15px;
+    }
 </style>

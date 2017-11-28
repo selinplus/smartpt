@@ -1,10 +1,15 @@
 <template>
     <div class="footer-bar">
-        <Row class="footer-row">
-            <Col span="6"><Icon type="home" class="tips"></Icon><div>{{currentDate}}</div></Col>
-            <Col span="6"><Icon type="paper-airplane" calss="start"></Icon><div>{{start}}</div></Col>
-            <Col span="6"><Icon type="ios-people" class="contact"></Icon><div>{{contact}}</div></Col>
-            <Col span="6"><Icon type="ios-analytics" class="vipService"></Icon><div>{{vipService}}</div></Col>
+        <Row class="footer-row" type="flex" justify="space-between">
+            <Col span="8" class="tips">
+                <router-link to="/"><Icon type="play">开始</Icon></router-link>
+            </Col>
+            <Col span="8" class="tips">
+                <router-link :to="Contact"><Icon type="person-stalker">亲...</Icon></router-link>
+            </Col>
+            <Col span="8" class="tips">
+                 <router-link :to="Vip"><Icon type="eye-disabled">VIP</Icon></router-link>
+            </Col>
         </Row>
     </div>
 </template>
@@ -24,7 +29,7 @@
 
 <style scoped>
     .footer-bar{
-        background-color: blueviolet;
+        background-color: #0C3C26;
         min-height: 60px;
         position: fixed;
         width: 100%;
@@ -34,15 +39,12 @@
         z-index: 1000;
     }
     .footer-row{
-        padding: 10px 5px;
+        padding: 0px 5px;
         margin: 10px;
     }
-    .tip{
-        font-size: 26px;
+    .tips{
+        font-size: 16px;
+        text-align: center;
         color:antiquewhite; 
-    }
-    .start .contact .vipService{
-        font-size: 26px;
-        color:antiquewhite;
     }
 </style>

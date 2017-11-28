@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h3>联络人</h3>
-        
+<h3>VIP功能</h3>
     </div>
 </template>
 

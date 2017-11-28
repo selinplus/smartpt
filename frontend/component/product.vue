@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h3>联络人</h3>
-        
+        产品选择页
     </div>
 </template>
 

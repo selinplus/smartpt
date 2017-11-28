@@ -27,6 +27,16 @@ module.exports = {
         },
       },
       {
+        test: /\.less$/,
+        use: [{
+          loader: 'style-loader', // creates style nodes from JS strings
+        }, {
+          loader: 'css-loader', // translates CSS into CommonJS
+        }, {
+          loader: 'less-loader', // compiles Less to CSS
+        }],
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
@@ -49,8 +59,8 @@ module.exports = {
     alias: {
       vue: 'vue/dist/vue',
       iv: 'iview/dist/',
-      // iviewcss: 'iview/dist/styles/',
       utils: path.resolve(__dirname, './utils'),
+      cmp: path.resolve(__dirname, './frontend/component/'),
     },
     extensions: [ '*', '.js', '.vue', '.json', '.css' ],
   },

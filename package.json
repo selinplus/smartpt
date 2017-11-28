@@ -11,7 +11,8 @@
     "egg-view-nunjucks": "^2.1.4",
     "iview": "^2.7.3",
     "koa-proxy": "^0.9.0",
-    "vue": "^2.4.4"
+    "vue": "^2.4.4",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autod": "^2.10.0",
@@ -42,7 +43,7 @@
     "start": "egg-scripts start --daemon",
     "stop": "egg-scripts stop",
     "webpack-dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "dev": "egg-bin dev",
+    "dev": "egg-bin dev && cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",

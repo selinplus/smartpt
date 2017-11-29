@@ -12,17 +12,15 @@ export default new Router({
     {
       path: '/',
       component: Customer,
-      children: [
-        {
-          path: 'vip',
-          name: 'Vip',
-          component: Vip,
-        },
-        {
-          path: 'contact',
-          name: 'Contact',
-          component: Contact,
-        },
-      ],
+    },
+    {
+      path: 'vip',
+      name: 'Vip',
+      component: Vip,
+    },
+    {
+      path: 'contact',
+      name: 'Contact',
+      component: Contact,
     }],
 });

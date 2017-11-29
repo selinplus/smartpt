@@ -28,7 +28,7 @@
         padding: 0 5;
         width: 100%;
         background-color: #0C3C26;
-        box-shadow: 3 -10 5 20 rgba(110, 70, 110, 0.6);
+        box-shadow: 3 10 5 20 rgba(0, 40, 0, 0.6);
         min-height: 40px;
     }
     .header-row{

@@ -1,69 +1,27 @@
 <template>
     <div>
-        <Pageheader></Pageheader>
-        <div class="container">
-            <Steps :current = "step">
-                <Step title="用户" icon="person-add"></Step>
-                <Step title="产品" icon="flame"></Step>
-                <Step title="规划" icon="leaf"></Step>
-            </Steps>
-            <router-view></router-view>     
-        </div>
-        <Row>
-            <Col span="24">
-                <ButtonGroup>
-                    <Button type="primary" :disabled="disable_btn" @click="nextStep">
-                        <Icon type="chevron-left"></Icon>
-                        上一步
-                    </Button>
-                    <Button type="primary" @click="preStep">
-                        下一步
-                        <Icon type="chevron-right"></Icon>
-                    </Button>
-                </ButtonGroup>
-            </Col>
-        </Row>
-        <div class="footer-bar">
-            <Row class="footer-row" type="flex" justify="space-between">
-                <Col span="8" class="tips">
-                    <router-link to="/"><Icon type="play">开始</Icon></router-link>
-                </Col>
-                <Col span="8" class="tips">
-                    <router-link to="Contact"><Icon type="person-stalker">亲...</Icon></router-link>
-                </Col>
-                <Col span="8" class="tips">
-                    <router-link to="Vip"><Icon type="eye-disabled">VIP</Icon></router-link>
-                </Col>
-            </Row>
-        </div>
+        <PageHeader></PageHeader>
+        <div class="context">
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
+        </div>        
+        <PageFooter></PageFooter>
     </div>
 </template>
 <script>
 import Customer from 'cmp/customer.vue';
-import Pageheader from 'cmp/pageheader.vue';
+import PageHeader from 'cmp/page-header.vue';
+import PageFooter from 'cmp/page-footer.vue';
 
 export default {
   name: 'app',
   data () {
     return{
-        userId: 'test1',
-        step: 0
+        userId: 'test1'
     }
   },
-  computed:{
-      disable_btn: function(){
-          return this.step === 0 ;
-      }
-  },
-  methods:{
-      nextStep(){
-          this.step++;
-      },
-      preStep(){
-          this.step>1 ? this.step -=1: 1;
-      }
-  },
-  components: { Pageheader, Customer },
+  components: { PageHeader, PageFooter },
 }
 </script>
 <style scoped>
@@ -85,5 +43,11 @@ export default {
         font-size: 16px;
         text-align: center;
         color:antiquewhite; 
+    }
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-to  {
+        opacity: 0
     }
 </style>

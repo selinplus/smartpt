@@ -10,4 +10,5 @@ module.exports = app => {
   app.get('/orders/list', app.controller.orders.list);
   // dingTalk according
   app.get('/dingtalk/userlist', app.controller.dingtalk.userList);
+  // app.get('*', app.controller.home.index);
 };

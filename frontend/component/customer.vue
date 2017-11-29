@@ -1,14 +1,31 @@
 <template>
     <div class="picker">
         <Form :model="formItem" :label-width="80">
-            <FormItem label="用户">
-                <Input v-model="formItem.name" placeholder="输入或者点击选择"></Input><span><a href=""><Icon type="more"></Icon></a></span>
+            <FormItem label="姓名" class="inline">
+                 <Input v-model="formItem.name">
+                    <span slot="prepend"><Icon type="person-stalker" color="#0C3C26"></Icon></span>
+                    <Button slot="append" icon="grid" @click="customerModal = true"></Button>
+                </Input>
             </FormItem>
-            <FormItem label="电话">
-                <Input v-model="formItem.mobile" placeholder="18805350000"></Input>
+            <Modal v-model="customerModal" width="360">
+                <p slot="header" style="color:#f60;text-align:center">
+                    <Icon type="information-circled"></Icon>
+                    <span>选择用户</span>
+                </p>
+                <div style="text-align:center">
+                    <ul>
+                        <li :class="person" v-for="item of datainfo" :key="item.id" @click="selThat(item.id)"><Icon type="person" color="green" class="person-icon"></Icon>{{ [ item.name, item.address ].join(' ') }}</li>
+                    </ul>
+                </div>
+                <div slot="footer">
+                    <Alert show-icon>点击选择用户</Alert>
+                </div>
+            </Modal>
+            <FormItem label="电话(可选)">
+                <Input v-model="formItem.mobile" placeholder="18805350000"><span slot="prepend"><Icon type="ios-telephone" color="#0C3C26"></Icon></span></Input>
             </FormItem>
-            <FormItem label="地址">
-                <Input v-model="formItem.address" placeholder="烟台市XX区"></Input>
+            <FormItem label="地址(可选)">
+                <Input v-model="formItem.address" placeholder="烟台市XX区"><span slot="prepend"><Icon type="home" color="#0C3C26"></Icon></span></Input>
             </FormItem>
         </Form>
     </div>
@@ -19,30 +36,19 @@
         data() {
             return {
                 userId: 'test1',
-                customerId: '1',
+                customerModal: false,
                 datainfo:[],
-                autocomplete:'auto',
                 formItem: {
+                    id: 0,
                     name: '',
                     mobile: '',
                     address: '',
-                }
-            }
-        },
-        computed:{
-            customerInfo:() =>{
-                return this.datainfo.forEach(
-                    (v) =>{
-                        if(v.id === this.customerId){
-                            console.log(Array.from(v).split(' '));
-                            return ;
-                        }
-                    }
-                ); 
+                },
+                person:'list-person',
             }
         },
         methods: {
-           handleSearch (value) {
+           handleSearch: function() {
                 axios.get('/customer/query',{params:{
                         keyword:value,
                         user_id:this.userId,
@@ -52,9 +58,27 @@
                 }).catch((error) => {
                         console.log(error);
                 });
-            }
-            
+            },
+            sel:function(){
+                this.customerModal = false;
+                this.$Message.success('选择用户成功.');
+            },
+            selThat:function(id){
+                this.customerModal = false;
+                this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
+                this.$Message.success('选择用户成功.');
+            },
         },
+        created:function(){
+            axios.get('/customer/query',{params:{
+                    user_id:this.userId,
+            }}).then((response) => {
+                this.datainfo = response.data;
+            }).catch((error) => {
+                console.log(error);
+                this.$Message.success('选择用户失败.');
+            });      
+        }
     }
 </script>
 
@@ -63,8 +87,15 @@
         padding: 15px;
         color:#0C3C26;
     }
-    .auto{
-        width: 250px;
+    .inline{
+        display: inline-block;
+    }
+    .list-person{
+        text-align: left;
+        line-height: 2;
         color: #0C3C26;
+    }
+    .person-icon{
+        padding: 1px 15px;
     }
 </style>

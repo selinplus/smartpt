@@ -1,13 +1,12 @@
 <template>
     <div class="content">
-        <Card style="width:380px">
+        <Card style="width:95%">
             <p slot="title" class="card-header">
                 <Icon type="ios-information"></Icon>
-                现在，只需要三步，即可完成订单
+                现在，只需三步，即可完成订单!
             </p>
-            <a href="#" slot="extra" @click.prevent="changeLimit">
+            <a href="#" slot="extra" >
                 <Icon type="ios-loop-strong"></Icon>
-                Change
             </a>
             <div class="container">
                 <Steps :current = "step">

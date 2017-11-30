@@ -48,17 +48,6 @@
             }
         },
         methods: {
-           handleSearch: function() {
-                axios.get('/customer/query',{params:{
-                        keyword:value,
-                        user_id:this.userId,
-                }}).then((response) => {
-                      console.log(this);
-                      this.datainfo = response.data;
-                }).catch((error) => {
-                        console.log(error);
-                });
-            },
             sel:function(){
                 this.customerModal = false;
                 this.$Message.success('选择用户成功.');
@@ -70,7 +59,7 @@
             },
         },
         created:function(){
-            axios.get('/customer/query',{params:{
+            this.axios.get('/customer/query',{params:{
                     user_id:this.userId,
             }}).then((response) => {
                 this.datainfo = response.data;

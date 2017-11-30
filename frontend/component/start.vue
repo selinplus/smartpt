@@ -1,6 +1,6 @@
 <template>
     <div class="content">
-        <Card style="width:95%">
+        <Card style="width:99%">
             <p slot="title" class="card-header">
                 <Icon type="ios-information"></Icon>
                 现在，只需三步，即可完成订单!
@@ -16,9 +16,11 @@
                 </Steps>           
             </div>
             <div class="stepcomponent">
-                <Customer :class="[step==0 ? '': 'hiddenme']"></Customer>
-                <Product :class="[step==1 ? '': 'hiddenme']"></Product>
-                <Schedule :class="[step==2 ? '': 'hiddenme']"></Schedule>
+                <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
+                   <keep-alive>
+                   <component :is="comarray[step]"></component>
+                   </keep-alive>
+                </transition>               
             </div>
             <Row>
                 <Col span="24">
@@ -48,22 +50,13 @@
             return {
                 step: 0,
                 textname: '下一步',
+                comarray:['Customer', 'Product', 'Schedule'],
             }
         }, 
         computed:{
             pre_btn: function(){
                 return this.step === 0 ;
-            },
-            customer: function(){
-                return this.step === 0 ;
-            },
-            product:function(){
-                console.log(this.step===1);
-                return this.step === 1 ;
-            },
-            schedule:function(){
-                return this.step === 2 ;
-            }
+            },            
         },
          methods:{
             nextStep: function(){

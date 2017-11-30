@@ -61,6 +61,7 @@ module.exports = {
       iv: 'iview/dist/',
       utils: path.resolve(__dirname, './utils'),
       cmp: path.resolve(__dirname, './frontend/component/'),
+      assets: path.resolve(__dirname, './app/public/static/'),
     },
     extensions: [ '*', '.js', '.vue', '.json', '.css' ],
   },

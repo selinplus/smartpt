@@ -11,11 +11,11 @@
             </a>
             <div class="content">
                 <Table border :columns="cols" :data="lists" class="list_product"></Table>
-                <ul>
-                    <li v-for="item of products" :key="item.id" class="product">{{ [item.name ,[item.price, "￥"].join(),item.quantity].join(' ') }}</li>
-                </ul>
             </div>
         </Card>
+        <!-- <ul>
+            <li v-for="item of products" :key="item.id" class="product">{{ [item.name ,[item.price, "￥"].join(''),item.quantity].join(' ') }}</li>
+        </ul> -->
     </div>
 </template>
 
@@ -29,24 +29,30 @@
                     {
                         title: '产品',
                         key: 'name',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('strong', params.row.name)
-                            ]);
-                        }
                     },
                     {
                         title: '价格',
                         key: 'price'
                     },
                     {
-                        title: 'VIP价格',
+                        title: 'VIP',
                         key: 'vip_price'
                     },
                     {
-                        title: 'Action',
+                        title: '数量',
+                        key: 'quantity',
+                        render: (h,params) => {
+                            return h('span',{
+                                style:{
+                                    color: '#0C3C26',
+                                }
+                            },this.lists[params.index].quantity===0 ?'-': this.lists[params.index].quantity);
+                        }
+                    },
+                    {
+                        title: '操作',
                         key: 'action',
-                        width: 100,
+                        width: 80,
                         align: 'center',
                         render: (h, params) => {
                             return h('div', [
@@ -56,7 +62,8 @@
                                         size: 'small'
                                     },
                                     style: {
-                                        marginRight: '5px'
+                                        marginRight: '5px',
+                                        padding: 0,
                                     },
                                     on: {
                                         click: () => {
@@ -68,6 +75,9 @@
                                     props: {
                                         type: 'error',
                                         size: 'small'
+                                    },
+                                    style: {
+                                        padding: 0
                                     },
                                     on: {
                                         click: () => {
@@ -83,28 +93,22 @@
         },
         methods: {
             plus:function(index) {
-                const res = this.products.findIndex((o) => o.id === this.lists[index].id);
-                if(res === -1){
-                    this.products.push(this.lists[index]);
-                }else{
-                    this.products[res].quantity++;
-                }
-                this.$Message.success(this.lists[index].name+'已选取.');
+                this.lists[index].quantity++;  
+                console.log(this.lists);             
+                this.$Message.success(this.lists[index].name+'+1.');
             },
             minus: function(index) {
-                const res = this.products.findIndex((o) => o.id === this.lists[index].id);
-                if(res === -1){
+                const res =  this.lists[index].quantity;;
+                if(res === 0){
                     this.$Message.error(this.lists[index].name+'还未选取.');
                 }else{
-                    this.products[res].quantity--;
-                    if(this.products[res].quantity === 0 ){
-                        this.products.splice(res,1);
-                    }
+                    this.lists[index].quantity--;
+                    this.$Message.success(this.lists[index].name+'-1.');
                 }
-                this.$Message.success(this.lists[index].name+'已取消.');
             },
             empty:function(){
                 this.products = [];
+                this.lists.forEach(data => data.quantity = 0);
             }
         },
         created: function(){
@@ -112,6 +116,7 @@
                     user_id:this.userId,
             }}).then((response) => {
                 this.lists = response.data;
+                this.lists.forEach(data => Object.assign(data, { quantity: 0 }));
                 this.$Message.success('产品已加载.');
             }).catch((error) => {
                 console.log(error);
@@ -126,7 +131,7 @@
     min-height: 120px;
 }
 .content{
-    max-height: 320px;
+    max-height: 230px;
     overflow-y: scroll;
 }
 .ivu-table-cell{

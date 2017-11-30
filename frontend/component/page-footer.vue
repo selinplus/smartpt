@@ -31,7 +31,7 @@
         position: fixed;
         width: 100%;
         left: 0px;
-        box-shadow: 3px -10px 5px rgba(0, 30, 0, 0.6);
+        box-shadow: 3px -5px 5px rgba(0, 30, 0, 0.6);
         bottom: 0px;
     }
     .footer-row{

@@ -2,7 +2,7 @@
     <div>
         <PageHeader></PageHeader>
         <div class="context">
-            <transition name="fade">
+            <transition name="fade" mode="out-in">
                 <router-view></router-view>
             </transition>
         </div>        

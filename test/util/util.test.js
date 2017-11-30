@@ -13,6 +13,7 @@ const datainfo = [{ id: 1, name: '李毅', mobile: '18690011234', address: '芝�
   { id: 4, name: '王聪', mobile: '18660061234', address: '幸福' },
   { id: 5, name: '刘三', mobile: '13963841134', address: '开发区' },
 ];
-const result = [];
-datainfo.forEach(data => { result.push(Object.values(data).join(' ')); });
-console.log(result);
+// const result = [];
+// datainfo.forEach(data => { result.push(Object.values(data).join(' ')); });
+datainfo.forEach(data => Object.assign(data, { quantity: 0 }));
+console.log(datainfo);

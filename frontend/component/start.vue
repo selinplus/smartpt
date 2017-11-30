@@ -10,11 +10,25 @@
             </a>
             <div class="container">
                 <Steps :current = "step">
-                    <Step title="用户" content="添加或者选择用户"></Step>
+                    <Step title="用户" content="添加/选择用户"></Step>
                     <Step title="产品" content="选择产品"></Step>
                     <Step title="规划" content="规划食用方案"></Step>
                 </Steps>           
             </div>
+            <Row>
+                <Col span="24">
+                    <ButtonGroup style="align:right;">
+                        <Button small type="primary" :disabled="pre_btn" @click="preStep">
+                            <Icon type="chevron-left"></Icon>
+                            上一步
+                        </Button>
+                        <Button small type="primary"  @click="nextStep">
+                            {{textname}}
+                            <Icon type="chevron-right"></Icon>
+                        </Button>
+                    </ButtonGroup>
+                </Col>
+            </Row>
             <div class="stepcomponent">
                 <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
                    <keep-alive>
@@ -22,20 +36,6 @@
                    </keep-alive>
                 </transition>               
             </div>
-            <Row>
-                <Col span="24">
-                    <ButtonGroup>
-                        <Button type="primary" :disabled="pre_btn" @click="preStep">
-                            <Icon type="chevron-left"></Icon>
-                            上一步
-                        </Button>
-                        <Button type="primary"  @click="nextStep">
-                            {{textname}}
-                            <Icon type="chevron-right"></Icon>
-                        </Button>
-                    </ButtonGroup>
-                </Col>
-            </Row>
         </Card>
     </div>
 </template>

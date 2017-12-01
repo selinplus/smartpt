@@ -15,20 +15,18 @@
                     <Step title="规划" content="规划食用方案"></Step>
                 </Steps>           
             </div>
-            <Row>
-                <Col span="24">
-                    <ButtonGroup style="align:right;">
-                        <Button small type="primary" :disabled="pre_btn" @click="preStep">
-                            <Icon type="chevron-left"></Icon>
-                            上一步
-                        </Button>
-                        <Button small type="primary"  @click="nextStep">
-                            {{textname}}
-                            <Icon type="chevron-right"></Icon>
-                        </Button>
-                    </ButtonGroup>
-                </Col>
-            </Row>
+            <div>
+                <ButtonGroup style="align:right;">
+                    <Button small type="primary" :disabled="pre_btn" @click="preStep">
+                        <Icon type="chevron-left"></Icon>
+                        上一步
+                    </Button>
+                    <Button small type="primary"  @click="nextStep">
+                        {{textname}}
+                        <Icon type="chevron-right"></Icon>
+                    </Button>
+                </ButtonGroup>
+            </div>  
             <div class="stepcomponent">
                 <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
                    <keep-alive>
@@ -76,7 +74,7 @@
 
 <style scoped>
 .content{
-    padding: 15px;
+    padding: 2px;
 }
 .hiddenme{
     display: none;

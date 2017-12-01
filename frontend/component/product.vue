@@ -1,6 +1,6 @@
 <template>
     <div class="outer">
-        <Card style="width:100%">
+        <Card style="width:100%" :padding="3">
             <p slot="title">
                 <Icon type="ios-film-outline"></Icon>
                选择产品
@@ -13,9 +13,11 @@
                 <Table border :columns="cols" :data="lists" class="list_product"></Table>
             </div>
         </Card>
-        <!-- <ul>
-            <li v-for="item of products" :key="item.id" class="product">{{ [item.name ,[item.price, "￥"].join(''),item.quantity].join(' ') }}</li>
-        </ul> -->
+        <Alert show-icon>
+            小结:
+            <Icon type="ios-lightbulb-outline" slot="icon"></Icon>
+            <template slot="desc" class="summary"><span class="summary">件数:{{products.count}}</span><span class="summary">金额:{{products.sum}}</span><span class="summary">VIP金额:{{products.vip_sum}}</span> </template>
+        </Alert>
     </div>
 </template>
 
@@ -23,7 +25,7 @@
     export default {
         data() {
             return {
-                products: [],
+                products: { count:0, sum:0.0, vip_sum:0.0},
                 lists: [],
                 cols: [
                     {
@@ -93,22 +95,33 @@
         },
         methods: {
             plus:function(index) {
-                this.lists[index].quantity++;  
-                console.log(this.lists);             
+                const pp = this.lists[index];
+                pp.quantity++;
+                this.$set(this.lists, index, pp);
+                this.products.count++;
+                this.products.sum = parseFloat((this.products.sum + this.lists[index].price).toFixed(10)); 
+                this.products.vip_sum = parseFloat((this.products.vip_sum + this.lists[index].vip_price).toFixed(10)); ;  
                 this.$Message.success(this.lists[index].name+'+1.');
+                this.$baby.products = this.lists;
             },
             minus: function(index) {
-                const res =  this.lists[index].quantity;;
-                if(res === 0){
+                const pp =  this.lists[index];
+                if(pp.quantity === 0){
                     this.$Message.error(this.lists[index].name+'还未选取.');
                 }else{
-                    this.lists[index].quantity--;
+                    pp.quantity--;
+                    this.$set(this.lists, index, pp); 
+                    this.products.count--;
+                    this.products.sum = parseFloat((this.products.sum - this.lists[index].price).toFixed(10));;  
+                    this.products.vip_sum = parseFloat((this.products.vip_sum - this.lists[index].vip_price).toFixed(10)); 
                     this.$Message.success(this.lists[index].name+'-1.');
+                    this.$baby.products = this.lists;
                 }
             },
             empty:function(){
-                this.products = [];
-                this.lists.forEach(data => data.quantity = 0);
+                Object.keys(this.products).forEach(key => this.products[key] = 0);
+                this.lists.forEach(data => this.$set(data, 'quantity', 0));
+                this.$baby.products=[];
             }
         },
         created: function(){
@@ -116,8 +129,8 @@
                     user_id:this.userId,
             }}).then((response) => {
                 this.lists = response.data;
-                this.lists.forEach(data => Object.assign(data, { quantity: 0 }));
-                this.$Message.success('产品已加载.');
+                this.lists.forEach(data => this.$set(data, 'quantity', 0));
+                this.$Message.success(this.$baby.customer.name,'产品已加载.');
             }).catch((error) => {
                 console.log(error);
                 this.$Message.success('产品加载失败.');
@@ -134,11 +147,9 @@
     max-height: 230px;
     overflow-y: scroll;
 }
-.ivu-table-cell{
-    padding-left: 10px;
-    padding-right: 8px;
-}
-.ivu-card-body{
-    padding: 10px;
+.summary{
+    padding-right: 5px;
+    color:#0C3C26;
+    border-bottom: 1px solid #541276;
 }
 </style>

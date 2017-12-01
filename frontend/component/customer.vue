@@ -55,6 +55,7 @@
             selThat:function(id){
                 this.customerModal = false;
                 this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
+                this.$baby.customer = this.formItem;
                 this.$Message.success('选择用户成功.');
             },
         },

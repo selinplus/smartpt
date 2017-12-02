@@ -3,7 +3,7 @@
         <Card style="width:100%" :padding="3">
             <p slot="title">
                 <Icon type="ios-film-outline"></Icon>
-               选择产品
+               选择{{this.$baby.customer.name}}产品
             </p>
             <a href="#" slot="extra" @click.prevent="empty">
                 <Icon type="ios-loop-strong"></Icon>
@@ -123,6 +123,39 @@
                 this.lists.forEach(data => this.$set(data, 'quantity', 0));
                 this.$baby.products=[];
             }
+        },
+        activated:function(){
+            console.log(this.$baby.customer);
+            if(this.$baby.customer.id === 0){
+                this.$Notice.open({
+                    title: '历史产品',
+                    desc: '<i class="ivu-icon ivu-icon-ios-color-wand-outline"></i>新用户',
+                    duration: 0
+                });
+            }else{
+                this.axios.get('/product/history',{params:{
+                    customerId: this.$baby.customer.id,
+                }}).then((response) => {
+                    const result = response.data;
+                    const history = [];
+                    for(let item of result){
+                        history.push(item.name);
+                    }
+                    this.$Notice.open({
+                        title: '历史产品',
+                        desc: histor.join(' '),
+                        duration: 0
+                    });
+                    
+                }).catch((error) => {
+                     this.$Notice.open({
+                        title: '历史产品',
+                        desc: '未找到历史记录'
+                    });
+                });
+            }
+            
+            
         },
         created: function(){
             this.axios.get('/product/list',{params:{

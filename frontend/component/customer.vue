@@ -7,6 +7,7 @@
                     <Button slot="append" icon="grid" @click="customerModal = true"></Button>
                 </Input>
             </FormItem>
+            <!-- <span style="display:none;">{{ userName }}</span> -->
             <Modal v-model="customerModal" width="360">
                 <p slot="header" style="color:#f60;text-align:center">
                     <Icon type="information-circled"></Icon>
@@ -35,7 +36,6 @@
     export default {
         data() {
             return {
-                userId: 'test1',
                 customerModal: false,
                 datainfo:[],
                 formItem: {
@@ -47,6 +47,17 @@
                 person:'list-person',
             }
         },
+        watch:{
+            formItem:function(val){
+                this.$baby.customer = val;
+            }
+        },
+        // computed:{
+        //     userName:function(){
+        //         this.$baby.customer.name = this.formItem.name;
+        //         return [this.formItem.name,'选中'].join('');
+        //     }
+        // },
         methods: {
             sel:function(){
                 this.customerModal = false;
@@ -55,7 +66,7 @@
             selThat:function(id){
                 this.customerModal = false;
                 this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
-                this.$baby.customer = this.formItem;
+                // this.$baby.customer = this.formItem;
                 this.$Message.success('选择用户成功.');
             },
         },
@@ -84,6 +95,7 @@
         text-align: left;
         line-height: 2;
         color: #0C3C26;
+        border-bottom: 1px solid #0c1112;
     }
     .person-icon{
         padding: 1px 15px;

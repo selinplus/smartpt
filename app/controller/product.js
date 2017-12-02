@@ -7,6 +7,11 @@ class ProductController extends Controller {
     const result = await service.product.list();
     ctx.body = result;
   }
+  async history() {
+    const { ctx, service } = this;
+    const { customerId } = ctx.query;
+    ctx.body = await service.product.history(customerId);
+  }
 }
 
 module.exports = ProductController;

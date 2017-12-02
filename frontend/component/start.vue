@@ -28,7 +28,7 @@
                 </ButtonGroup>
             </div>  
             <div class="stepcomponent">
-                <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
+                <transition mode="out-in" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
                    <keep-alive>
                    <component :is="comarray[step]"></component>
                    </keep-alive>
@@ -58,14 +58,62 @@
         },
          methods:{
             nextStep: function(){
-                this.step += 1;
-                if(this.step===2){
-                    this.textname='保  存';
+                switch (this.step) {
+                    case 0:
+                        if(this.$baby.customer.name){
+                            this.step = 1;                            
+                        }else{
+                            this.$Notice.error({
+                            title: '必须选择或者填写姓名',
+                            desc: ''
+                            });
+                        }
+                        break;
+                    case 1:
+                        if(this.$baby.products.length){
+                            this.textname='保存';
+                            this.step = 2;                            
+                        }else{
+                            this.$Notice.error({
+                            title: '请选择产品',
+                            desc: ''
+                            });
+                        }
+                        break;
+                    default:
+                        if(this.$baby.schedule.length){
+                           this.saveOrder();                            
+                        }else{
+                            this.$Notice.error({
+                            title: '请安排计划',
+                            desc: ''
+                            });
+                        }
+                        break;
                 }
+                
             },
             preStep: function(){
                 this.step>0 ? this.step -=1: 0;
                 this.textname='下一步';
+            },
+            saveOrder:function(){
+                this.axios.post('/order/save',this.$baby)
+                .then((response) => {
+                    this.datainfo = response.data;
+                    this.$Notice.success({
+                        title: '订单已完成',
+                        desc: [this.$baby.customer.name,'数量',this.$baby.products.count,'金额',this.$baby.products.sum,'会员价',this.$baby.products.vip_sum].join(' ')
+                    });
+                    this.$baby.customer = {};
+                    this.$baby.products = [];
+                    this.$baby.schedule = [];
+                }).catch((error) => {
+                    this.$Notice.error({
+                        title: '订单已完成',
+                        desc: [this.$baby.customer.name,'数量',this.$baby.products.count,'金额',this.$baby.products.sum,'会员价',this.$baby.products.vip_sum].join(' ')
+                    });
+                });      
             }
         }, 
         components:{ Customer, Product, Schedule},

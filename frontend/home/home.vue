@@ -27,7 +27,6 @@ export default {
 <style scoped>
     .footer-bar{
         background-color: #0C3C26;
-        min-height: 60px;
         position: fixed;
         width: 100%;
         left: 0px;
@@ -36,8 +35,7 @@ export default {
         z-index: 1000;
     }
     .footer-row{
-        padding: 0px 5px;
-        margin: 10px;
+        margin: 8px;
     }
     .tips{
         font-size: 16px;

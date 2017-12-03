@@ -7,7 +7,6 @@
                     <Button slot="append" icon="grid" @click="customerModal = true"></Button>
                 </Input>
             </FormItem>
-            <!-- <span style="display:none;">{{ userName }}</span> -->
             <Modal v-model="customerModal" width="360">
                 <p slot="header" style="color:#f60;text-align:center">
                     <Icon type="information-circled"></Icon>
@@ -47,17 +46,6 @@
                 person:'list-person',
             }
         },
-        watch:{
-            formItem:function(val){
-                this.$baby.customer = val;
-            }
-        },
-        // computed:{
-        //     userName:function(){
-        //         this.$baby.customer.name = this.formItem.name;
-        //         return [this.formItem.name,'选中'].join('');
-        //     }
-        // },
         methods: {
             sel:function(){
                 this.customerModal = false;
@@ -66,14 +54,20 @@
             selThat:function(id){
                 this.customerModal = false;
                 this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
-                // this.$baby.customer = this.formItem;
                 this.$Message.success('选择用户成功.');
             },
+            babyCustomer:function(newValue,oldValue){
+                this.$baby.customer = newValue;
+            }
+        },
+        activated:function(){
+            this.$watch('formItem', this.babyCustomer, {
+              deep: true
+            });            
         },
         created:function(){
-            this.axios.get('/customer/query',{params:{
-                    user_id:this.userId,
-            }}).then((response) => {
+            this.axios.get('/customer/query')
+            .then((response) => {
                 this.datainfo = response.data;
             }).catch((error) => {
                 console.log(error);

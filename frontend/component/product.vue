@@ -33,14 +33,6 @@
                         key: 'name',
                     },
                     {
-                        title: '价格',
-                        key: 'price'
-                    },
-                    {
-                        title: 'VIP',
-                        key: 'vip_price'
-                    },
-                    {
                         title: '数量',
                         key: 'quantity',
                         render: (h,params) => {
@@ -51,6 +43,14 @@
                             },this.lists[params.index].quantity===0 ?'-': this.lists[params.index].quantity);
                         }
                     },
+                    {
+                        title: '价格',
+                        key: 'price'
+                    },
+                    {
+                        title: 'VIP',
+                        key: 'vip_price'
+                    },                    
                     {
                         title: '操作',
                         key: 'action',
@@ -65,7 +65,7 @@
                                     },
                                     style: {
                                         marginRight: '5px',
-                                        padding: 0,
+                                        padding: '3px',
                                     },
                                     on: {
                                         click: () => {
@@ -79,7 +79,7 @@
                                         size: 'small'
                                     },
                                     style: {
-                                        padding: 0
+                                        padding: '3px'
                                     },
                                     on: {
                                         click: () => {
@@ -125,12 +125,10 @@
             }
         },
         activated:function(){
-            console.log(this.$baby.customer);
             if(this.$baby.customer.id === 0){
                 this.$Notice.open({
                     title: '历史产品',
-                    desc: '<i class="ivu-icon ivu-icon-ios-color-wand-outline"></i>新用户',
-                    duration: 0
+                    desc: '<i class="ivu-icon ivu-icon-ios-color-wand-outline"></i>新用户'
                 });
             }else{
                 this.axios.get('/product/history',{params:{
@@ -146,7 +144,6 @@
                         desc: histor.join(' '),
                         duration: 0
                     });
-                    
                 }).catch((error) => {
                      this.$Notice.open({
                         title: '历史产品',
@@ -154,8 +151,6 @@
                     });
                 });
             }
-            
-            
         },
         created: function(){
             this.axios.get('/product/list',{params:{

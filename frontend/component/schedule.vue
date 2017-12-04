@@ -3,7 +3,7 @@
         <Row>
             <Col span="8">
                 <ul>
-                    <li class="product-list"  v-for="item of datainfo" :key="item.id" @click="selThat(item.id, $event)">{{ [ item.name, item.quantity ].join(' ') }}</li>
+                    <li class="product-list"  v-for="item of datainfo" :key="item.id" @click="selThat(item.id, $event)">{{  item.name }}</li>
                 </ul>
             </Col>
             <Col span="15" offset="1">
@@ -89,14 +89,16 @@
                         if(morning+lunch+dinner>0){                     
                             const duration = Math.ceil(parseFloat(size*quantity/(morning+lunch+dinner)).toFixed(2));
                             const init = new Date(form.startDate);
-                            const startMili = init.getTime();
+                            const startMili = Date.parse(form.startDate);
                             console.log('startMili:',startMili);
                             console.log('duration:',duration);
                             const endMili =startMili + duration*1000*60*60*24;
-                            const end = new Date();
-                            end.setTime(endMili);
-                            console.log('endMili:',endMili);
-                            const strmonth = end.getMonth()<10 ? '0'+end.getMonth():end.getMonth();
+                            const end = new Date(endMili);
+                            // end.setTime(endMili);
+                            console.log('endYear:',end.getFullYear());
+                            console.log('endMonth:',end.getMonth());
+                            console.log('endDate:',end.getDate());
+                            const strmonth = end.getMonth()<9 ? '0'+(end.getMonth()+1):end.getMonth()+1;
                             const strdate = end.getDate()<10 ? '0'+end.getDate():end.getDate();
                             this.formItem.endDate = [end.getFullYear(), strmonth, strdate].join('-');
                         }                  

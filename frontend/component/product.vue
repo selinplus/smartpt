@@ -103,6 +103,7 @@
                 this.products.vip_sum = parseFloat((this.products.vip_sum + this.lists[index].vip_price).toFixed(10)); ;  
                 this.$Message.success(this.lists[index].name+'+1.');
                 this.$baby.products = this.lists;
+                this.$baby.summary = this.products;//合计
             },
             minus: function(index) {
                 const pp =  this.lists[index];
@@ -116,12 +117,14 @@
                     this.products.vip_sum = parseFloat((this.products.vip_sum - this.lists[index].vip_price).toFixed(10)); 
                     this.$Message.success(this.lists[index].name+'-1.');
                     this.$baby.products = this.lists;
+                    this.$baby.summary = this.products;//合计
                 }
             },
             empty:function(){
                 Object.keys(this.products).forEach(key => this.products[key] = 0);
                 this.lists.forEach(data => this.$set(data, 'quantity', 0));
                 this.$baby.products=[];
+                this.$baby.summary = {};//合计
             }
         },
         activated:function(){

@@ -86,7 +86,7 @@
                         }else{
                             this.$Notice.error({
                             title: '请安排计划',
-                            desc: ''
+                            desc: '为了更好的跟踪服务用户，建议填写食用规划.'
                             });
                         }
                         break;
@@ -103,7 +103,7 @@
                     this.datainfo = response.data;
                     this.$Notice.success({
                         title: '订单已完成',
-                        desc: [this.$baby.customer.name,'数量',this.$baby.products.count,'金额',this.$baby.products.sum,'会员价',this.$baby.products.vip_sum].join(' ')
+                        desc: [this.$baby.customer.name,'数量',this.$baby.summary.count,'金额',this.$baby.summary.sum,'会员价',this.$baby.summary.vip_sum].join(' ')
                     });
                     this.$baby.customer = {};
                     this.$baby.products = [];

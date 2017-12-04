@@ -13,11 +13,14 @@
 //   { id: 4, name: '王聪', mobile: '18660061234', address: '幸福' },
 //   { id: 5, name: '刘三', mobile: '13963841134', address: '开发区' },
 // ];
-const ele = { id: 1, name: '李毅', mobile: '18690011234', address: '芝罘' };
-// datainfo.forEach(data => { result.push(Object.values(data).join(' ')); });
-// datainfo.forEach(data => Object.assign(data, { quantity: 0 }));
-// console.log(datainfo);
-let {id, ...other} = ele;
-const nele = Object.assign({ id: 2 }, other);
+// const ele = { id: 1, name: '李毅', mobile: '18690011234', address: '芝罘' };
+// // datainfo.forEach(data => { result.push(Object.values(data).join(' ')); });
+// // datainfo.forEach(data => Object.assign(data, { quantity: 0 }));
+// // console.log(datainfo);
+// let {id, ...other} = ele;
+// const nele = Object.assign({ id: 2 }, other);
 
-console.log(nele);
+// console.log(nele);
+
+const today = new Date('2017-11-15');
+console.log(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());

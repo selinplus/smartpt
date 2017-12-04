@@ -12,7 +12,7 @@
                     <Icon type="information-circled"></Icon>
                     <span>选择用户</span>
                 </p>
-                <div style="text-align:center">
+                <div class="modal-content">
                     <ul>
                         <li :class="person" v-for="item of datainfo" :key="item.id" @click="selThat(item.id)"><Icon type="person" color="green" class="person-icon"></Icon>{{ [ item.name, item.address ].join(' ') }}</li>
                     </ul>
@@ -89,9 +89,15 @@
         text-align: left;
         line-height: 2;
         color: #0C3C26;
+        padding-bottom: 3px;
         border-bottom: 1px solid #0c1112;
     }
     .person-icon{
         padding: 1px 15px;
+    }
+    .modal-content{
+        text-align: center;
+        max-height: 400px;
+        overflow: scroll;
     }
 </style>

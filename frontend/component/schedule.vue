@@ -83,21 +83,14 @@
         watch:{// 录入时更新schedule库相对应产品
             formItem:{
                 handler:function(form){
-                    console.log(form.startDate);
                     if(form.startDate){// 已选择开始日期
                         const {size,quantity,morning,lunch,dinner} = form;
                         if(morning+lunch+dinner>0){                     
                             const duration = Math.ceil(parseFloat(size*quantity/(morning+lunch+dinner)).toFixed(2));
                             const init = new Date(form.startDate);
                             const startMili = Date.parse(form.startDate);
-                            console.log('startMili:',startMili);
-                            console.log('duration:',duration);
                             const endMili =startMili + duration*1000*60*60*24;
-                            const end = new Date(endMili);
-                            // end.setTime(endMili);
-                            console.log('endYear:',end.getFullYear());
-                            console.log('endMonth:',end.getMonth());
-                            console.log('endDate:',end.getDate());
+                            const end = new Date(endMili);                            
                             const strmonth = end.getMonth()<9 ? '0'+(end.getMonth()+1):end.getMonth()+1;
                             const strdate = end.getDate()<10 ? '0'+end.getDate():end.getDate();
                             this.formItem.endDate = [end.getFullYear(), strmonth, strdate].join('-');

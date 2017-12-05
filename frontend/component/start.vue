@@ -29,10 +29,10 @@
             </div>  
             <div class="stepcomponent">
                 <transition mode="out-in" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
-                   <keep-alive>
-                   <component :is="comarray[step]"></component>
-                   </keep-alive>
-                </transition>               
+                    <keep-alive>
+                        <component :is="comarray[step]"></component>
+                    </keep-alive> 
+                </transition>     
             </div>
         </Card>
     </div>
@@ -105,14 +105,21 @@
                         title: '订单已完成',
                         desc: [this.$baby.customer.name,'数量',this.$baby.summary.count,'金额',this.$baby.summary.sum,'会员价',this.$baby.summary.vip_sum].join(' ')
                     });
-                    this.$baby.customer = {};
-                    this.$baby.products = [];
-                    this.$baby.schedule = [];
+                    this.$baby = {};
+                    this.step = 0;
                 }).catch((error) => {
                     this.$Notice.error({
                         title: '订单已完成',
-                        desc: [this.$baby.customer.name,'数量',this.$baby.products.count,'金额',this.$baby.products.sum,'会员价',this.$baby.products.vip_sum].join(' ')
+                        desc: [this.$baby.customer.name,'数量',this.$baby.summary.count,'金额',this.$baby.summary.sum,'会员价',this.$baby.summary.vip_sum].join(' ')
                     });
+                    this.$baby = {
+                        userId: 'tets info',
+                        summary: {},
+                        customer: {},
+                        products: [],
+                        schedule: [],
+                    };
+                    this.step = 0;
                 });      
             }
         }, 
@@ -137,4 +144,5 @@
 .card-header{
     color:#0C3C26;
 }
+
 </style>

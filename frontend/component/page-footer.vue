@@ -2,13 +2,13 @@
     <div class="footer-bar">
         <Row class="footer-row" type="flex" justify="space-between">
             <Col span="8">
-                <router-link to="/"  class="tips"><Icon type="play"></Icon><div class="link">开始</div></router-link>
+                <router-link to="/" active-class="current" class="tips" exact><Icon type="play"></Icon><div class="link">开始</div></router-link>
             </Col>
             <Col span="8">
-                <router-link to="Contact" class="tips"><Icon type="person-stalker"></Icon><div class="link">联络人</div></router-link>
+                <router-link to="Contact" active-class="current" class="tips" exact><Icon type="person-stalker"></Icon><div class="link">联络人</div></router-link>
             </Col>
             <Col span="8">
-                <router-link to="Vip"  class="tips"><Icon type="eye-disabled"></Icon><div class="link">VIP</div></router-link>
+                <router-link to="Vip" active-class="current" class="tips" exact><Icon type="eye-disabled"></Icon><div class="link">VIP</div></router-link>
             </Col>
         </Row>
     </div>
@@ -28,10 +28,10 @@
     .footer-bar{
         background-color: #0C3C26;
         min-height: 60px;
-        position: fixed;
+        /* position: fixed; */
         width: 100%;
         left: 0px;
-        box-shadow: 3px -5px 5px rgba(0, 30, 0, 0.6);
+        /* box-shadow: 3px -5px 5px rgba(0, 30, 0, 0.6); */
         bottom: 0px;
     }
     .footer-row{
@@ -40,6 +40,7 @@
     }
     .tips{
         font-size: 16px;
+        /* background-color: #345; */
         text-align: center;
         color:white;
         display:block;
@@ -49,5 +50,9 @@
     }
     .fade-enter, .fade-leave-to  {
         opacity: 0
+    }
+    .current{
+        box-shadow: 5px 3px 2px rgba(0, 30, 0, 0.6);
+        color:#dc7fc7;
     }
 </style>

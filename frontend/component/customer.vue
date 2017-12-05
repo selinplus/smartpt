@@ -56,14 +56,27 @@
                 this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
                 this.$Message.success('选择用户成功.');
             },
-            babyCustomer:function(newValue,oldValue){
-                this.$baby.customer = newValue;
-            }
+            // babyCustomer:function(newValue,oldValue){
+            //     this.$baby.customer = newValue;
+            // }
+        },
+        watch:{
+            formItem:{
+                handler:function(form){
+                    this.$baby.customer = form;
+                },
+                deep:true
+            },
         },
         activated:function(){
-            this.$watch('formItem', this.babyCustomer, {
-              deep: true
-            });            
+            console.log('customer activted');
+            if(this.$baby.customer.name){
+                console.log(this.$baby.customer.name);
+                this.formItem = this.$baby.customer;
+            }else{
+                console.log('22');
+                this.formItem ={};
+            }         
         },
         created:function(){
             this.axios.get('/customer/query')

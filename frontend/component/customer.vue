@@ -47,31 +47,25 @@
             }
         },
         methods: {
-            sel:function(){
-                this.customerModal = false;
-                this.$Message.success('选择用户成功.');
-            },
             selThat:function(id){
                 this.customerModal = false;
                 this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
-                this.$Message.success('选择用户成功.');
             },
-            // babyCustomer:function(newValue,oldValue){
-            //     this.$baby.customer = newValue;
-            // }
         },
         watch:{
             formItem:{
-                handler:function(form){
-                    this.$baby.customer = form;
+                handler:function(fresh,origin){
+                    console.log("set baby customer");
+                    console.log(fresh);
+                    this.$baby.customer = fresh;
                 },
                 deep:true
             },
         },
         activated:function(){
             console.log('customer activted');
-            if(this.$baby.customer.name){
-                console.log(this.$baby.customer.name);
+            console.log(this.$baby);
+            if(this.$baby.customer.name){                
                 this.formItem = this.$baby.customer;
             }else{
                 console.log('22');

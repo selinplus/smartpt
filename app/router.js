@@ -7,7 +7,7 @@ module.exports = app => {
   app.get('/customer/query', app.controller.customer.query);
   app.post('/customer/add', app.controller.customer.add);
   app.get('/customer/list', app.controller.customer.list);
-  app.post('/orders/save', app.controller.orders.add);
+  app.post('/orders/save', app.controller.orders.save);
   app.get('/orders/list', app.controller.orders.list);
   // dingTalk according
   app.get('/dingtalk/userlist', app.controller.dingtalk.userList);

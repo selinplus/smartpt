@@ -42,7 +42,7 @@
     import Customer from './customer.vue';
     import Product from './product.vue';
     import Schedule from './schedule.vue';
-
+    import qs from 'qs';
     export default {
         data() {
             return {
@@ -98,27 +98,31 @@
                 this.textname='下一步';
             },
             saveOrder:function(){
-                this.axios.post('/order/save',this.$baby)
+                const store = Object.assign({},this.$baby);
+                this.$baby = {
+                    userId: 'XXXX',
+                    summary: {},
+                    customer: {},
+                    products: [],
+                    schedule: [],
+                };
+                console.log(this.$baby);
+                this.axios({method:'post',url:'/orders/save',contentType: "application/json",data:store})
                 .then((response) => {
-                    this.datainfo = response.data;
+                    console.log(response.data);
                     this.$Notice.success({
                         title: '订单已完成',
-                        desc: [this.$baby.customer.name,'数量',this.$baby.summary.count,'金额',this.$baby.summary.sum,'会员价',this.$baby.summary.vip_sum].join(' ')
+                        desc: [store.customer.name,'数量',store.summary.count,'金额',store.summary.sum,'会员价',store.summary.vip_sum].join(' '),
+                        duration: 0
                     });
-                    this.$baby = {};
+                    this.textname='下一步';
                     this.step = 0;
                 }).catch((error) => {
                     this.$Notice.error({
-                        title: '订单已完成',
-                        desc: [this.$baby.customer.name,'数量',this.$baby.summary.count,'金额',this.$baby.summary.sum,'会员价',this.$baby.summary.vip_sum].join(' ')
+                        title: '订单未提交',
+                        desc: [store.customer.name,'数量',store.summary.count,'金额',store.summary.sum,'会员价',store.summary.vip_sum].join(' ')
                     });
-                    this.$baby = {
-                        userId: 'tets info',
-                        summary: {},
-                        customer: {},
-                        products: [],
-                        schedule: [],
-                    };
+                    this.textname='下一步';
                     this.step = 0;
                 });      
             }

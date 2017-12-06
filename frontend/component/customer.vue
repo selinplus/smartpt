@@ -59,19 +59,16 @@
                     }else if(fresh.id !== origin.id && origin.id !== 0){// 切换选择用户
                     }else{// 填写用户信息，新用户，id赋值为0
                         fresh.id = 0;
-                    }
-                    this.$baby.customer = Object.assign({},fresh);
+                    }                    
+                    this.$baby.customer = fresh;
+                    console.log('WATCH', this.$baby.customer);
                 },
                 deep:true
             },
         },
-        activated:function(){
-            console.log("---:",this.$baby.products);
-            if(this.$baby.customer.name){                
-                this.formItem = Object.assign({},this.$baby.customer);
-            }else{
-                this.formItem ={};
-            }         
+        mounted:function(){
+           this.$baby.clear();
+           console.log('mounted:',this.$baby.customer);
         },
         created:function(){
             this.axios.get('/customer/query')

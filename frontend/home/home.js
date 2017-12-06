@@ -11,19 +11,6 @@ Vue.use(iView);
 Vue.use(VueAxios, axios);
 Vue.use(BabyStore);
 
-Vue.component('i-store', {
-  data() {
-    return {
-      store: {
-        userId: '001',
-        summary: {},
-        customer: {},
-        products: [],
-        schedule: [],
-      },
-    };
-  },
-});
 new Vue({
   router,
   render: h => h(home),

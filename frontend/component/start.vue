@@ -5,9 +5,9 @@
                 <Icon type="ios-information"></Icon>
                 现在，只需三步，即可完成订单!
             </p>
-            <a href="#" slot="extra" >
+            <span slot="extra" @click="empty">
                 <Icon type="ios-loop-strong"></Icon>
-            </a>
+            </span>
             <div class="container">
                 <Steps :current = "step">
                     <Step title="用户" content="添加/选择用户"></Step>
@@ -15,23 +15,20 @@
                     <Step title="规划" content="规划食用方案"></Step>
                 </Steps>           
             </div>
-            <div>
-                <ButtonGroup style="align:right;">
-                    <Button small type="primary" :disabled="pre_btn" @click="preStep">
-                        <Icon type="chevron-left"></Icon>
-                        上一步
-                    </Button>
-                    <Button small type="primary"  @click="nextStep">
-                        {{textname}}
-                        <Icon type="chevron-right"></Icon>
-                    </Button>
-                </ButtonGroup>
+            <div class="btn-next-container">
+                <Row>
+                    <Col span="4" offset="20">
+                        <Button small type="primary"  @click="nextStep">
+                            {{textname}}
+                            <Icon type="chevron-right"></Icon>
+                        </Button>
+                    </Col>
+                </Row>             
+               
             </div>  
             <div class="stepcomponent">
                 <transition mode="out-in" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
-                    <keep-alive>
-                        <component :is="comarray[step]"></component>
-                    </keep-alive> 
+                    <component :is="comarray[step]"></component>
                 </transition>
             </div>
         </Card>
@@ -42,7 +39,6 @@
     import Customer from './customer.vue';
     import Product from './product.vue';
     import Schedule from './schedule.vue';
-    import qs from 'qs';
     export default {
         data() {
             return {
@@ -51,15 +47,11 @@
                 comarray:['Customer', 'Product', 'Schedule'],
             }
         }, 
-        computed:{
-            pre_btn: function(){
-                return this.step === 0 ;
-            },            
-        },
-         methods:{
+        methods:{
             nextStep: function(){
                 switch (this.step) {
                     case 0:
+                    console.log('start:', this.$baby.customer);
                         if(this.$baby.customer.name){
                             this.step = 1;                            
                         }else{
@@ -93,20 +85,8 @@
                 }
                 
             },
-            preStep: function(){
-                this.step>0 ? this.step -=1: 0;
-                this.textname='下一步';
-            },
             saveOrder:function(){
                 const store = Object.assign({},this.$baby);
-                this.$baby = Object.assign({},{
-                    userId: '0000',
-                    summary: {},
-                    customer: {},
-                    products: [],
-                    schedule: [],
-                });
-                console.log(this.$baby.customer.name);
                 this.axios({method:'post',url:'/orders/save',contentType: "application/json",data:store})
                 .then((response) => {
                     this.$Notice.success({
@@ -124,6 +104,10 @@
                     this.textname='下一步';
                     this.step = 0;
                 });      
+            },
+            empty:function(){
+                this.$baby.clear();
+                this.step = 0;
             }
         }, 
         components:{ Customer, Product, Schedule},
@@ -147,5 +131,7 @@
 .card-header{
     color:#0C3C26;
 }
-
+.btn-next-container{
+    background: #8e438e;
+}
 </style>

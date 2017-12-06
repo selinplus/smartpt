@@ -49,7 +49,7 @@
                 }
             }
         },
-        activated:function() {
+        mounted:function() {
             // 清空规划库
             this.$baby.schedule=[];
             this.$baby.products.forEach((element,index) => {

@@ -103,7 +103,7 @@
                 this.summary.vip_sum = parseFloat((this.summary.vip_sum + this.lists[index].vip_price).toFixed(10)); ;  
                 this.$Message.success(this.lists[index].name+'+1.');
                 this.$baby.products = this.lists.slice();
-                this.$baby.summary = Object.assign({},this.summary);//合计
+                this.$baby.summary = this.summary;//合计
             },
             minus: function(index) {
                 const pp =  this.lists[index];
@@ -117,7 +117,7 @@
                     this.summary.vip_sum = parseFloat((this.summary.vip_sum - this.lists[index].vip_price).toFixed(10)); 
                     this.$Message.success(this.lists[index].name+'-1.');
                     this.$baby.products = this.lists.slice();
-                    this.$baby.summary = Object.assign({},this.summary);//合计
+                    this.$baby.summary = this.summary;//合计
                 }
             },
             empty:function(){
@@ -127,7 +127,7 @@
                 this.$baby.summary = {};//合计
             }
         },
-        activated:function(){
+        mounted:function(){
             if(this.$baby.customer.id === 0){
                 this.$Notice.open({
                     title: '历史产品',

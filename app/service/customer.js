@@ -11,8 +11,10 @@ class CustomerService extends Service {
     return result;
   }
   async add(customer) {
-    const result = await this.app.mysql.insert('customer', customer);
-    return { success: result.affectedRows === 1 };
+    return await this.app.mysql.insert('customer', customer);
+  }
+  async find(customer) {
+    return await this.app.mysql.select('customer', { where: customer, orders: [[ 'id', 'desc' ]] });
   }
   async query(keyword, userId) {
     const likeword = [ '%', keyword, '%' ].join('');

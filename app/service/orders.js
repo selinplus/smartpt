@@ -10,9 +10,12 @@ class OrdersService extends Service {
     });
     return result;
   }
-  async save(body) {
-    const result = await this.app.mysql.insert('customer', body);
-    return { success: result.affectedRows === 1 };
+  async save(orderArray) {
+    let cnt = 0;
+    for (const o of orderArray) {
+      cnt += await this.app.mysql.insert('orders', o);
+    }
+    return cnt;
   }
 }
 

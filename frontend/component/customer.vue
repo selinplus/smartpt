@@ -49,26 +49,27 @@
         methods: {
             selThat:function(id){
                 this.customerModal = false;
-                this.formItem  = this.datainfo.filter((e) => e.id === id)[0];
+                this.formItem  = Object.assign({},this.datainfo.filter((e) => e.id === id)[0]);
             },
         },
         watch:{
             formItem:{
                 handler:function(fresh,origin){
-                    console.log("set baby customer");
-                    console.log(fresh);
-                    this.$baby.customer = fresh;
+                    if(fresh.id !== 0 && origin.id === 0){// 初始选择用户
+                    }else if(fresh.id !== origin.id && origin.id !== 0){// 切换选择用户
+                    }else{// 填写用户信息，新用户，id赋值为0
+                        fresh.id = 0;
+                    }
+                    this.$baby.customer = Object.assign({},fresh);
                 },
                 deep:true
             },
         },
         activated:function(){
-            console.log('customer activted');
-            console.log(this.$baby);
+            console.log("---:",this.$baby.products);
             if(this.$baby.customer.name){                
-                this.formItem = this.$baby.customer;
+                this.formItem = Object.assign({},this.$baby.customer);
             }else{
-                console.log('22');
                 this.formItem ={};
             }         
         },
@@ -77,7 +78,6 @@
             .then((response) => {
                 this.datainfo = response.data;
             }).catch((error) => {
-                console.log(error);
                 this.$Message.success('选择用户失败.');
             });      
         }

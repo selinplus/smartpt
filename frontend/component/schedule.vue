@@ -77,7 +77,7 @@
                 }
                 return 0;
             });
-            // 只显示选购的产品          
+            // 只显示选购的产品   
             this.datainfo = this.$baby.products.filter((ele) =>ele.quantity>0);
         },
         watch:{// 录入时更新schedule库相对应产品
@@ -86,7 +86,7 @@
                     if(form.startDate){// 已选择开始日期
                         const {size,quantity,morning,lunch,dinner} = form;
                         if(morning+lunch+dinner>0){                     
-                            const duration = Math.ceil(parseFloat(size*quantity/(morning+lunch+dinner)).toFixed(2));
+                            const duration = Math.ceil(parseFloat(size*quantity/(morning+lunch+dinner)).toFixed(2))-1;
                             const init = new Date(form.startDate);
                             const startMili = Date.parse(form.startDate);
                             const endMili =startMili + duration*1000*60*60*24;

@@ -10,8 +10,8 @@ class CustomerService extends Service {
     });
     return result;
   }
-  async add(body) {
-    const result = await this.app.mysql.insert('customer', body);
+  async add(customer) {
+    const result = await this.app.mysql.insert('customer', customer);
     return { success: result.affectedRows === 1 };
   }
   async query(keyword, userId) {

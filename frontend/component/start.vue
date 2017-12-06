@@ -32,7 +32,7 @@
                     <keep-alive>
                         <component :is="comarray[step]"></component>
                     </keep-alive> 
-                </transition>     
+                </transition>
             </div>
         </Card>
     </div>
@@ -99,17 +99,16 @@
             },
             saveOrder:function(){
                 const store = Object.assign({},this.$baby);
-                this.$baby = {
-                    userId: 'XXXX',
+                this.$baby = Object.assign({},{
+                    userId: '0000',
                     summary: {},
                     customer: {},
                     products: [],
                     schedule: [],
-                };
-                console.log(this.$baby);
+                });
+                console.log(this.$baby.customer.name);
                 this.axios({method:'post',url:'/orders/save',contentType: "application/json",data:store})
                 .then((response) => {
-                    console.log(response.data);
                     this.$Notice.success({
                         title: '订单已完成',
                         desc: [store.customer.name,'数量',store.summary.count,'金额',store.summary.sum,'会员价',store.summary.vip_sum].join(' '),

@@ -16,7 +16,7 @@
         <Alert show-icon>
             小结:
             <Icon type="ios-lightbulb-outline" slot="icon"></Icon>
-            <template slot="desc" class="summary"><span class="summary">件数:{{products.count}}</span><span class="summary">金额:{{products.sum}}</span><span class="summary">VIP金额:{{products.vip_sum}}</span> </template>
+            <template slot="desc" class="summary"><span class="summary">件数:{{summary.count}}</span><span class="summary">金额:{{summary.sum}}</span><span class="summary">VIP金额:{{summary.vip_sum}}</span> </template>
         </Alert>
     </div>
 </template>
@@ -25,7 +25,7 @@
     export default {
         data() {
             return {
-                products: { count:0, sum:0.0, vip_sum:0.0},
+                summary: { count:0, sum:0.0, vip_sum:0.0},
                 lists: [],
                 cols: [
                     {
@@ -98,12 +98,12 @@
                 const pp = this.lists[index];
                 pp.quantity++;
                 this.$set(this.lists, index, pp);
-                this.products.count++;
-                this.products.sum = parseFloat((this.products.sum + this.lists[index].price).toFixed(10)); 
-                this.products.vip_sum = parseFloat((this.products.vip_sum + this.lists[index].vip_price).toFixed(10)); ;  
+                this.summary.count++;
+                this.summary.sum = parseFloat((this.summary.sum + this.lists[index].price).toFixed(10)); 
+                this.summary.vip_sum = parseFloat((this.summary.vip_sum + this.lists[index].vip_price).toFixed(10)); ;  
                 this.$Message.success(this.lists[index].name+'+1.');
-                this.$baby.products = this.lists;
-                this.$baby.summary = this.products;//合计
+                this.$baby.products = this.lists.slice();
+                this.$baby.summary = Object.assign({},this.summary);//合计
             },
             minus: function(index) {
                 const pp =  this.lists[index];
@@ -112,16 +112,16 @@
                 }else{
                     pp.quantity--;
                     this.$set(this.lists, index, pp); 
-                    this.products.count--;
-                    this.products.sum = parseFloat((this.products.sum - this.lists[index].price).toFixed(10));;  
-                    this.products.vip_sum = parseFloat((this.products.vip_sum - this.lists[index].vip_price).toFixed(10)); 
+                    this.summary.count--;
+                    this.summary.sum = parseFloat((this.summary.sum - this.lists[index].price).toFixed(10));;  
+                    this.summary.vip_sum = parseFloat((this.summary.vip_sum - this.lists[index].vip_price).toFixed(10)); 
                     this.$Message.success(this.lists[index].name+'-1.');
-                    this.$baby.products = this.lists;
-                    this.$baby.summary = this.products;//合计
+                    this.$baby.products = this.lists.slice();
+                    this.$baby.summary = Object.assign({},this.summary);//合计
                 }
             },
             empty:function(){
-                Object.keys(this.products).forEach(key => this.products[key] = 0);
+                Object.keys(this.summary).forEach(key => this.summary[key] = 0);
                 this.lists.forEach(data => this.$set(data, 'quantity', 0));
                 this.$baby.products=[];
                 this.$baby.summary = {};//合计
@@ -163,7 +163,6 @@
                 this.lists.forEach(data => this.$set(data, 'quantity', 0));
                 this.$Message.success(this.$baby.customer.name,'产品已加载.');
             }).catch((error) => {
-                console.log(error);
                 this.$Message.success('产品加载失败.');
             });      
         }

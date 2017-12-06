@@ -22,5 +22,6 @@
 
 // console.log(nele);
 
-const today = new Date('2017-11-15');
-console.log(today.getDate() < 10 ? '0' + today.getDate() : today.getDate());
+const today = Date.now();
+console.log(typeof today);
+console.log(today);

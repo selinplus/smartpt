@@ -21,29 +21,47 @@ class CustomerService extends Service {
     const result = await this.app.mysql.query('select id,name,mobile,address,create_time from customer where user_id= ?', [ userId ]);
     return result;
   }
-  async timeLine(userId) {
+  guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+  async timeLine(userId) { // 顾客时间线核心函数
+    const result = [];
     const customerList = await this.query('', userId);
-    for (const c of customerList) {
-      const begin = { createTime: c.create_time, desc: '加入平台' };// 起始点
-      const orderHistory = this.service.orders.customerHistory(c.customer_id);// 通过用户ID获取订单ID
-      const timeArray = [];
-      const time = [];
+    for (const customer of customerList) {
+      const nodes = [];
+      const node = { timer: '', desc: '' };
+      node.timer = customer.create_time;
+      node.desc = [ '加入平台' ];
+      nodes.push(node);
+      const orderHistory = await this.service.orders.customerHistory(customer.id);// 通过用户ID获取订单ID
       for (const order of orderHistory) { // 遍历订单
+        const node = { timer: '', desc: '' };
         const orderArray = [];
         const orderProduct = await this.service.orders.detailbyOrderId(order.order_id);
         if (orderProduct) {
           const createTime = orderProduct[0].create_time;
-          time.push(createTime);
           for (const so of orderProduct) {
             const { name, quantity } = so;
             orderArray.push([ '产品', name, '数量', quantity ].join(' '));
           }
+          node.timer = createTime;
+          node.desc = orderArray;
+          node.key = this.guid();
+          nodes.push(node);
         }
-        const create_time = orderProduct[0].create_time;
       }
+      customer.nodes = nodes;
+      customer.key = this.guid();
+      result.push(customer);
     }
-    const result = {};
-    result.start = customer;
+    console.log(result);
+    return result;
   }
 }
 

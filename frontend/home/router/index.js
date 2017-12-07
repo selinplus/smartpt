@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Start from 'cmp/start.vue';
 import Contact from 'cmp/contact.vue';
-import Vip from 'cmp/vip.vue';
+import OrderInfo from 'cmp/orderinfo.vue';
 Vue.use(Router);
 
 export default new Router({
@@ -14,9 +14,9 @@ export default new Router({
       component: Start,
     },
     {
-      path: '/vip',
-      name: 'Vip',
-      component: Vip,
+      path: '/Order',
+      name: 'Order',
+      component: OrderInfo,
     },
     {
       path: '/contact',

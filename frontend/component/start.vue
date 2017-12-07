@@ -17,8 +17,8 @@
             </div>
             <div class="btn-next-container">
                 <Row>
-                    <Col span="4" offset="20">
-                        <Button small type="primary"  @click="nextStep">
+                    <Col span="4" offset="18">
+                        <Button small type="ghost" shape="circle" @click="nextStep">
                             {{textname}}
                             <Icon type="chevron-right"></Icon>
                         </Button>
@@ -27,8 +27,8 @@
                
             </div>  
             <div class="stepcomponent">
-                <transition mode="out-in" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
-                    <component :is="comarray[step]"></component>
+                <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
+                   <component :is="comarray[step]"></component>
                 </transition>
             </div>
         </Card>
@@ -132,6 +132,6 @@
     color:#0C3C26;
 }
 .btn-next-container{
-    background: #8e438e;
+    margin-top: 6px;
 }
 </style>

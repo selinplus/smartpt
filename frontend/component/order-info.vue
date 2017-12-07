@@ -1,6 +1,6 @@
 <template>
     <div>
-<h3>VIP功能</h3>
+<h3>订单信息</h3>
     </div>
 </template>
 

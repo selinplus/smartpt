@@ -2,9 +2,9 @@ const Controller = require('egg').Controller;
 
 class CustomerController extends Controller {
   async list() {
-    const { ctx, session, service, app } = this;
-    const { user_id = app.config.user_id } = session || {};
+    const { ctx, service, app } = this;
     const { limit = app.config.limit, page = 1 } = ctx.query;
+    const user_id = this.ctx.session.userId;
     const result = await service.customer.list(user_id, limit, page);
     this.ctx.encapsulateQuery(result);
   }
@@ -19,6 +19,12 @@ class CustomerController extends Controller {
     const { ctx, service } = this;
     const { keyword = '', userId = 'test1' } = ctx.query;
     const result = await service.customer.query(keyword, userId);
+    ctx.body = result;
+  }
+  async timeLine() {
+    const { ctx, service } = this;
+    const userId = ctx.session.userId;
+    const result = await service.customer.timeLine(userId);
     ctx.body = result;
   }
 }

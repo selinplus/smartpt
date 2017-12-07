@@ -10,7 +10,9 @@ class ProductController extends Controller {
   async history() {
     const { ctx, service } = this;
     const { customerId } = ctx.query;
-    ctx.body = await service.product.history(customerId);
+    const his = await service.product.history(customerId);
+    console.log(his);
+    ctx.body = his;
   }
 }
 

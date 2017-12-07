@@ -6,8 +6,8 @@
                     <li class="product-list"  v-for="item of datainfo" :key="item.id" @click="selThat(item.id, $event)">{{  item.name }}</li>
                 </ul>
             </Col>
-            <Col span="15" offset="1">
-                <div class="sch-main" :class="{show}">
+            <Col span="15" offset="1" class="sch-main">
+                <div  :class="{show}">
                     <Form :model="formItem" >
                         <div>
                             <h3>{{formItem.name}}</h3>
@@ -79,6 +79,10 @@
             });
             // 只显示选购的产品   
             this.datainfo = this.$baby.products.filter((ele) =>ele.quantity>0);
+            this.$Notice.info({
+                            title: '请安排计划',
+                            desc: '为了更好的跟踪服务用户，建议填写食用规划.'
+                            });
         },
         watch:{// 录入时更新schedule库相对应产品
             formItem:{

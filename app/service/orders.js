@@ -17,6 +17,12 @@ class OrdersService extends Service {
     }
     return cnt;
   }
+  async customerHistory(customerId) {
+    return await this.app.mysql.query('select distinct order_id from orders where customer_id = ?', [ customerId ]);
+  }
+  async detailbyOrderId(orderId) {
+    return await this.app.mysql.query('select a.create_time,a.order_id,a.quantity,p.name from orders a, product p where a.product_id = p.id and a.order_id=?', [ orderId ]);
+  }
 }
 
 module.exports = OrdersService;

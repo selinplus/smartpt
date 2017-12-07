@@ -138,13 +138,14 @@
                     customerId: this.$baby.customer.id,
                 }}).then((response) => {
                     const result = response.data;
+                    console.log(result);
                     const history = [];
                     for(let item of result){
                         history.push(item.name);
                     }
                     this.$Notice.open({
                         title: '历史产品',
-                        desc: histor.join(' '),
+                        desc: history.join(' '),
                         duration: 0
                     });
                 }).catch((error) => {

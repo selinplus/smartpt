@@ -22,6 +22,6 @@
 
 // console.log(nele);
 
-const today = Date.now();
+const today = new Date();
 console.log(typeof today);
-console.log(today);
+console.log(today.toLocaleString());

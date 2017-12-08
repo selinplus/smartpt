@@ -5,7 +5,8 @@ class HomeController extends Controller {
   async index() {
     this.ctx.session.userId = 'test1';
     this.ctx.session.username = '龙韵';
-    await this.ctx.render('home.njk');
+    const user = { username: this.ctx.session.username };
+    await this.ctx.render('home.njk', user);
   }
 }
 

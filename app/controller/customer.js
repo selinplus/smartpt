@@ -24,7 +24,9 @@ class CustomerController extends Controller {
   async timeLine() {
     const { ctx, service } = this;
     const userId = ctx.session.userId;
-    const result = await service.customer.timeLine(userId);
+    const username = ctx.session.username;
+    const dataset = await service.customer.timeLine(userId);
+    const result = { username, dataset };
     ctx.body = result;
   }
 }

@@ -7,6 +7,7 @@ import 'iv/styles/iview.css';
 import router from './router';
 import 'assets/animate.css';
 import BabyStore from './baby';
+import '../theme/index.less';
 Vue.use(iView);
 Vue.use(VueAxios, axios);
 Vue.use(BabyStore);

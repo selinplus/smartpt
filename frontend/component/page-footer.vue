@@ -1,13 +1,16 @@
 <template>
     <div class="footer-bar">
         <Row class="footer-row" type="flex" justify="space-between">
-            <Col span="8">
+            <Col span="6">
                 <router-link to="/" active-class="current" class="tips" exact><Icon type="play"></Icon><div class="link">开始</div></router-link>
             </Col>
-            <Col span="8">
+            <Col span="6">
                 <router-link to="Contact" active-class="current" class="tips" exact><Icon type="person-stalker"></Icon><div class="link">联络人</div></router-link>
             </Col>
-            <Col span="8">
+            <Col span="6">
+                <router-link to="My" active-class="current" class="tips" exact><Icon type="leaf"></Icon><div class="link">我的</div></router-link>
+            </Col>
+            <Col span="6">
                 <router-link to="Vip" active-class="current" class="tips" exact><Icon type="eye-disabled"></Icon><div class="link">VIP</div></router-link>
             </Col>
         </Row>

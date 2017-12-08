@@ -1,7 +1,9 @@
 <template>
     <div>
-    <h3>我的信息</h3>
-    
+        <h3>VIP功能</h3>
+        <ul>
+            <li></li>
+        </ul>
     </div>
 </template>
 

@@ -36,7 +36,7 @@ class CustomerService extends Service {
     for (const customer of customerList) {
       const nodes = [];
       const node = { timer: '', desc: '' };
-      node.timer = customer.create_time;
+      node.timer = customer.create_time.toLocaleString();
       node.desc = [ '加入平台' ];
       nodes.push(node);
       const orderHistory = await this.service.orders.customerHistory(customer.id);// 通过用户ID获取订单ID
@@ -48,9 +48,9 @@ class CustomerService extends Service {
           const createTime = orderProduct[0].create_time;
           for (const so of orderProduct) {
             const { name, quantity } = so;
-            orderArray.push([ '产品', name, '数量', quantity ].join(' '));
+            orderArray.push([ name, '数量', quantity ].join(' '));
           }
-          node.timer = createTime;
+          node.timer = createTime.toLocaleString();
           node.desc = orderArray;
           node.key = this.guid();
           nodes.push(node);
@@ -60,7 +60,6 @@ class CustomerService extends Service {
       customer.key = this.guid();
       result.push(customer);
     }
-    console.log(result);
     return result;
   }
 }

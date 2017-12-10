@@ -3,7 +3,7 @@ const Controller = require('egg').Controller;
 
 class OrdersController extends Controller {
   async save() {
-    const { ctx, service, app } = this;
+    const { ctx, service } = this;
     const store = ctx.request.body;
     console.log(store);
     let ccnt =0;
@@ -44,11 +44,21 @@ class OrdersController extends Controller {
     ctx.body = { success: orderItemCount};   
   }
   async list() {
-    const { ctx, session, service, app } = this;
-    const { user_id = app.config.user_id } = session || {};
+    const { ctx, service, app } = this;
+    const user_id = ctx.session.userId;
     const { limit = app.config.limit, page = 1 } = ctx.query;
     const result = await service.orders.list(user_id, limit, page);
     return ctx.encapsulateQuery(result);
+  }
+  async historyStatistic() {
+    const { ctx, service, app } = this;
+    const userId = ctx.session.userId;
+    ctx.body = await service.orders.historyStatistic(userId);    
+  }
+  async monthStatistic() {
+    const { ctx, service, app } = this;
+    const userId = ctx.session.userId;
+    ctx.body = await service.orders.monthStatistic(userId);
   }
 }
 

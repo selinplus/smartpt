@@ -29,6 +29,12 @@ class CustomerController extends Controller {
     const result = { username, dataset };
     ctx.body = result;
   }
+  async month() {
+    const { ctx, service } = this;
+    const userId = ctx.session.userId;
+    const result = await service.customer.month(userId);
+    ctx.body = result;
+  }
 }
 
 module.exports = CustomerController;

@@ -62,6 +62,10 @@ class CustomerService extends Service {
     }
     return result;
   }
+  async month(userId) {
+    const result = this.app.mysql.query('select * from customer where create_time >= DATE_ADD(curdate(),interval -day(curdate())+1 day) and user_id=?', [ userId ]);
+    return result;
+  }
 }
 
 module.exports = CustomerService;

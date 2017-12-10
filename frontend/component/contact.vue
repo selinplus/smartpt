@@ -59,7 +59,9 @@
 }
 .myname{
     text-align: center;
-    padding-bottom: 8px;
-    border-bottom: 1px solid;
+    padding:5px 5px 8px 10px;
+    border: 1px solid;
+    margin: 0px 0px 10px 10px;
+    border-bottom-left-radius: 26px;
 }
 </style>

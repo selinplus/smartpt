@@ -139,15 +139,21 @@
                 }}).then((response) => {
                     const result = response.data;
                     console.log(result);
-                    const history = [];
-                    for(let item of result){
-                        history.push(item.name);
+                    if(result.length){
+                        const history = [];
+                        for(let item of result){
+                            history.push(item.name);
+                        }
+                        this.$Notice.open({
+                            title: '历史产品',
+                            desc: history.join(' ')
+                        });
+                    }else{
+                         this.$Notice.open({
+                            title: '历史产品',
+                            desc: '暂无历史记录'
+                        });
                     }
-                    this.$Notice.open({
-                        title: '历史产品',
-                        desc: history.join(' '),
-                        duration: 0
-                    });
                 }).catch((error) => {
                      this.$Notice.open({
                         title: '历史产品',

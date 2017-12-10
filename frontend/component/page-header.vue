@@ -26,7 +26,7 @@
     export default {
         data() {
             return {
-                username: username,
+                username: _username,
                 visible: false,
             }
         },

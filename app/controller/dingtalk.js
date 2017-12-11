@@ -15,48 +15,38 @@ class DingtalkController extends Controller {
    * @see https://open-doc.dingtalk.com/doc2/detail.htm?spm=a219a.7386797.0.0.WXYE3B&treeId=171&articleId=104934&docType=1
    */
   * init() { // micappliction init 区别只在变量agentId
-    const url = this.ctx.request.url;
+    const url = 'http://n2qupr.natappfree.cc' + this.ctx.request.url;
+    console.log('url:', url);
     const noncestr = this.app.config.dingtalk.assist_noncestr;
     const initconfig = yield this.app.dingtalk.client.getJSApiConfig(url, { noncestr });
     const agentId = this.app.config.dingtalk.agentId.assist;
-    const jsApiList = [ 'runtime.info',
-      'device.notification.prompt',
-      'biz.chat.pickConversation',
-      'device.notification.confirm',
-      'device.notification.alert',
-      'device.notification.prompt',
-      'biz.chat.open',
-      'biz.util.open',
-      'biz.user.get',
-      'biz.contact.choose',
-      'biz.telephone.call',
-      'runtime.permission.requestAuthCode',
-      'biz.ding.post' ];
-    const config = Object.assign(initconfig, { agentId }, { jsApiList });
+    const config = Object.assign(initconfig, { agentId });
     console.log(config);
-    yield this.ctx.render('dingtalk.njk', config);
+    yield this.ctx.render('dingtalk.njk', { config });
   }
   * authtalk() { // h5 ajax request
     const { ctx } = this;
     const { event, code } = ctx.request.body;
-    const result = yield this.app.dingtalk.client.get(event, code);
-    console.log(result);
-    ctx.body = result;
+    const eventCon = event.replace('-', '/');
+    const result = yield this.app.dingtalk.client.get(eventCon, { code });
+    const json = JSON.stringify(result);
+    console.log(json);
+    ctx.body = json;
   }
   * mounted() { // h5 redirect request
     const { ctx } = this;
     const event = 'user/get';
     const { userid } = ctx.request.query;
     // 获取当前用户的详细信息
-    const result = yield this.app.dingtalk.client.get(event, userid);
+    const result = yield this.app.dingtalk.client.get(event, { userid });
     const user = yield this.app.mysql.select('dinguser', {
-      where: { userid: result.userid },
+      where: { id: result.userid },
     });
     this.ctx.session.userId = userid;
     this.ctx.session.username = result.username;
-    if (user) {
+    if (user.length > 0) {
       const row = {
-        userid,
+        id: userid,
         name: result.name,
         mobile: result.mobile,
         active: result.active,
@@ -66,7 +56,7 @@ class DingtalkController extends Controller {
       console.log(success);
     } else {
       const row = {
-        userid,
+        id: userid,
         name: result.name,
         mobile: result.mobile,
         active: result.active,

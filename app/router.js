@@ -18,6 +18,6 @@ module.exports = app => {
   app.get('/dingtalk/userlist', app.controller.dingtalk.userList);
   app.get('/dingtalk/init', app.controller.dingtalk.init);
   app.post('/dingtalk/authtalk', app.controller.dingtalk.authtalk);
-  app.post('/dingtalk/mounted', app.controller.dingtalk.mounted);
+  app.get('/dingtalk/mounted', app.controller.dingtalk.mounted);
   // app.get('*', app.controller.home.index);
 };

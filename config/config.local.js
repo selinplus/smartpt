@@ -20,10 +20,10 @@ module.exports = () => {
       agent: false,
     },
     dingtalk: {
-      corpid: 'ding85466599d9563b4c35c2f4657eb6378f',
-      corpsecret: 'RWnBryuGn3A3m4-ebknRRD8Bh1v6A_LlW9tStXAMEvX6_tebxP3G2ycb04-XOo5_',
-      assist_noncestr: 'Gen911@Inue',
-      agentId: { assist: '153504658' },
+      corpid: 'dingd1a7149886463b3735c2f4657eb6378f',
+      corpsecret: 'bVZ8Iahr0Tqt9NJ5PjWYr2WDMfEWNKML7bincqlM0CgYot4lUGtdNK94BLDIbUzm',
+      assist_noncestr: 'Gen911Inue',
+      agentId: { assist: '153562285' },
     },
     limit: 10,
   };

@@ -1,29 +1,25 @@
 
- logger.i('Here we go...');
+logger.i('Here we go...');
 
- logger.i(location.href);
-dd.config(_config);
+logger.i(location.href);
 dd.config({
-    agentId: _config.agentId,
-    corpId: _config.corpId,
-    timeStamp: _config.timeStamp,
-    nonceStr: _config.nonceStr,
-    signature: _config.signature,
-    jsApiList: [
-        'runtime.info',
-        'device.notification.prompt',
-        'biz.chat.pickConversation',
-        'device.notification.confirm',
-        'device.notification.alert',
-        'device.notification.prompt',
-        'biz.chat.open',
-        'biz.util.open',
-        'biz.user.get',
-        'biz.contact.choose',
-        'biz.telephone.call',
-        'biz.ding.post']
+  agentId: agentId,
+  corpId: corpId,
+  timeStamp: timeStamp,
+  nonceStr: nonceStr,
+  signature: signature,
+  jsApiList: [
+    'runtime.info',
+    'device.notification.prompt',
+    'biz.chat.open',
+    'biz.util.open',
+    'biz.user.get',
+    'biz.contact.choose',
+    'biz.telephone.call',
+    'runtime.permission.requestAuthCode',
+    'biz.ding.post' ]
 });
-// logger.i('1. _config:'+_config);
+
 dd.userid = 0;
 dd.ready(function() {
   logger.i('dd.ready rocks!');
@@ -38,22 +34,26 @@ dd.ready(function() {
   });
 
   dd.runtime.permission.requestAuthCode({
-    corpId: _config.corpId, // 企业id
+    corpId: corpId, // 企业id
     onSuccess(info) {
       logger.i('authcode: ' + info.code);
       $.ajax({
         url: '/dingtalk/authtalk/',
         type: 'POST',
-        data: { event: 'user/getuserinfo', code: info.code },
+        data: { event: 'user-getuserinfo', code: info.code },
         dataType: 'json',
         timeout: 900,
         success(data, status, xhr) {
-          let info = JSON.parse(data);
+          logger.i('return ---：'+ data.errcode);
+          const info = data;
+          logger.i('info:' + info);
           if (info.errcode === 0) {
             logger.i('user id: ' + info.userid);
             dd.userid = info.userid;
-            //转向获取用户信息
-            location.href = '/dingtalk/mounted/?userid=' + dd.userid;
+            // 转向获取用户信息
+            const u = '/dingtalk/mounted?userid=' + dd.userid;
+            logger.i(u);
+            location.href = u;
           } else {
             logger.e('auth error: ' + data);
           }

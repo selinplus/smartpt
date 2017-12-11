@@ -181,7 +181,7 @@
     min-height: 120px;
 }
 .content{
-    max-height: 230px;
+    max-height: 210px;
     overflow-y: scroll;
 }
 .summary{

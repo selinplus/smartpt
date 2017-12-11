@@ -1,17 +1,17 @@
 <template>
     <div class="header-bar">
         <Row class="header-row">
-            <Col span="12" class="brand"> SELIN Assist</Col>
-            <Col span="4" offset="2" ><Avatar shape="square" icon="person" />{{username}}</Col>
-            <Col span="5" offset="1">                
+            <Col span="10" class="brand"> SELIN Assist</Col>
+            <Col span="8" offset="2" ><Avatar shape="square" icon="person" />{{username}}</Col>
+            <Col span="3" offset="1">                
                 <Dropdown trigger="custom" :visible="visible" style="margin-left: 20px">
                     <a href="javascript:void(0)" class="bell" @click="handleOpen">
-                        <Badge count="3">
+                        <Badge count="0">
                             <Icon type="ios-bell-outline" size="26"></Icon>
                         </Badge>
                     </a>
                     <DropdownMenu slot="list">
-                        <p class="drop-content">XXX将要用尽</p>
+                        <p class="drop-content"></p>
                         <div style="text-align: right;margin:10px;">
                             <Button type="primary" size="small" @click="handleClose">关闭</Button>
                         </div>

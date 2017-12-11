@@ -18,7 +18,6 @@ export default {
   name: 'app',
   data () {
     return{
-        userId: 'test1'
     }
   },
   components: { PageHeader, PageFooter },

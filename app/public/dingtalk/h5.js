@@ -1,7 +1,6 @@
 
 logger.i('Here we go...');
 
-logger.i(location.href);
 dd.config({
   agentId: agentId,
   corpId: corpId,
@@ -44,15 +43,12 @@ dd.ready(function() {
         dataType: 'json',
         timeout: 900,
         success(data, status, xhr) {
-          logger.i('return ---：'+ data.errcode);
           const info = data;
-          logger.i('info:' + info);
           if (info.errcode === 0) {
             logger.i('user id: ' + info.userid);
             dd.userid = info.userid;
             // 转向获取用户信息
             const u = '/dingtalk/mounted?userid=' + dd.userid;
-            logger.i(u);
             location.href = u;
           } else {
             logger.e('auth error: ' + data);

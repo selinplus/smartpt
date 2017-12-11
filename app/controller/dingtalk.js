@@ -15,7 +15,7 @@ class DingtalkController extends Controller {
    * @see https://open-doc.dingtalk.com/doc2/detail.htm?spm=a219a.7386797.0.0.WXYE3B&treeId=171&articleId=104934&docType=1
    */
   * init() { // micappliction init 区别只在变量agentId
-    const url = 'http://n2qupr.natappfree.cc' + this.ctx.request.url;
+    const url = this.ctx.request.protocol + '://' + this.ctx.request.host + this.ctx.request.originalUrl; // 'http://n2qupr.natappfree.cc' + this.ctx.request.url;
     console.log('url:', url);
     const noncestr = this.app.config.dingtalk.assist_noncestr;
     const initconfig = yield this.app.dingtalk.client.getJSApiConfig(url, { noncestr });
@@ -30,7 +30,6 @@ class DingtalkController extends Controller {
     const eventCon = event.replace('-', '/');
     const result = yield this.app.dingtalk.client.get(eventCon, { code });
     const json = JSON.stringify(result);
-    console.log(json);
     ctx.body = json;
   }
   * mounted() { // h5 redirect request
@@ -39,11 +38,12 @@ class DingtalkController extends Controller {
     const { userid } = ctx.request.query;
     // 获取当前用户的详细信息
     const result = yield this.app.dingtalk.client.get(event, { userid });
+    console.log('result:', result);
     const user = yield this.app.mysql.select('dinguser', {
       where: { id: result.userid },
     });
     this.ctx.session.userId = userid;
-    this.ctx.session.username = result.username;
+    this.ctx.session.username = result.name;
     if (user.length > 0) {
       const row = {
         id: userid,
@@ -51,9 +51,7 @@ class DingtalkController extends Controller {
         mobile: result.mobile,
         active: result.active,
       };
-      const data = yield this.app.mysql.update('dinguser', row);
-      const success = data.affectedRows === 1;
-      console.log(success);
+      yield this.app.mysql.update('dinguser', row);
     } else {
       const row = {
         id: userid,
@@ -61,8 +59,7 @@ class DingtalkController extends Controller {
         mobile: result.mobile,
         active: result.active,
       };
-      const success = yield this.app.mysql.insert('dinguser', row);
-      console.log(success);
+      yield this.app.mysql.insert('dinguser', row);
     }
     this.ctx.redirect('/');
   }

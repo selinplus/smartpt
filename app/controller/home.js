@@ -3,10 +3,10 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    this.ctx.session.userId = 'test1';
-    this.ctx.session.username = '龙韵';
-    const user = { _username: this.ctx.session.username };
-    await this.ctx.render('home.njk', user);
+    const _username = this.ctx.session.username;
+    const _userId = this.ctx.session.userId;
+    console.log(_userId);
+    await this.ctx.render('home.njk', { _username, _userId });
   }
 }
 

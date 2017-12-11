@@ -16,7 +16,5 @@ module.exports = appInfo => {
       '.njk': 'nunjucks',
     },
   };
-  // test user_id for dingtalk
-  config.user_id = 'test1';
   return config;
 };

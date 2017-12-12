@@ -1,6 +1,3 @@
-
-logger.i('Here we go...');
-
 dd.config({
   agentId: agentId,
   corpId: corpId,
@@ -21,21 +18,19 @@ dd.config({
 
 dd.userid = 0;
 dd.ready(function() {
-  logger.i('dd.ready rocks!');
-
-  dd.runtime.info({
-    onSuccess(info) {
-      logger.i('runtime info: ' + JSON.stringify(info));
-    },
-    onFail(err) {
-      logger.e('fail: ' + JSON.stringify(err));
-    },
-  });
+  // dd.runtime.info({
+  //   onSuccess(info) {
+  //     logger.i('runtime info: ' + JSON.stringify(info));
+  //   },
+  //   onFail(err) {
+  //     logger.e('fail: ' + JSON.stringify(err));
+  //   },
+  // });
 
   dd.runtime.permission.requestAuthCode({
     corpId: corpId, // 企业id
     onSuccess(info) {
-      logger.i('authcode: ' + info.code);
+      logger.i('欢迎使用龙韵软件.');
       $.ajax({
         url: '/dingtalk/authtalk/',
         type: 'POST',
@@ -45,7 +40,7 @@ dd.ready(function() {
         success(data, status, xhr) {
           const info = data;
           if (info.errcode === 0) {
-            logger.i('user id: ' + info.userid);
+            logger.i('海内存知己，天涯若比邻');
             dd.userid = info.userid;
             // 转向获取用户信息
             const u = '/dingtalk/mounted?userid=' + dd.userid;
@@ -60,7 +55,6 @@ dd.ready(function() {
       });
     },
     onFail(err) {
-      logger.e('_config: ' + _config);
       logger.e('requestAuthCode fail: ' + JSON.stringify(err));
     },
   });

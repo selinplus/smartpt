@@ -33,6 +33,7 @@ class CustomerController extends Controller {
     const { ctx, service } = this;
     const userId = ctx.session.userId;
     const result = await service.customer.month(userId);
+    result.forEach(v => { v.create_time = v.create_time.toLocaleString(); });
     ctx.body = result;
   }
 }

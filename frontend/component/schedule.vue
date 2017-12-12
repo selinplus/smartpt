@@ -16,13 +16,13 @@
                         <span stype="display:none;">{{formItem.Id}}</span>
                         <FormItem label="开始日期">
                                 <DatePicker format="yyyy年MM月dd日" type="date" :editable="false" placeholder="选择日期" v-model="formItem.startDate"></DatePicker>
-                        </FormItem>
-                        <FormItem label="结束日期">
-                                <DatePicker format="yyyy年MM月dd日" type="date" :readonly="true" class="endDateform" placeholder="自动计算" v-model="formItem.endDate"></DatePicker>
-                        </FormItem>
+                        </FormItem>                        
                         <FormItem label="早餐"><InputNumber v-model="formItem.morning" :min="0"></InputNumber></FormItem>
                         <FormItem label="午餐"><InputNumber v-model="formItem.lunch" :min="0"></InputNumber></FormItem>
                         <FormItem label="晚餐"><InputNumber v-model="formItem.dinner" :min="0"></InputNumber></FormItem>
+                        <FormItem label="结束日期">
+                                <DatePicker format="yyyy年MM月dd日" type="date" :readonly="true" class="endDateform" placeholder="自动计算" v-model="formItem.endDate"></DatePicker>
+                        </FormItem>
                     </Form>
                 </div>
             </Col>

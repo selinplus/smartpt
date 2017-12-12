@@ -16,7 +16,7 @@ class CustomerService extends Service {
   async find(customer) {
     return await this.app.mysql.select('customer', { where: customer, orders: [[ 'id', 'desc' ]] });
   }
-  async query(keyword, userId) {
+  async query(userId) {
     // const likeword = [ '%', keyword, '%' ].join('');
     const result = await this.app.mysql.query('select id,name,mobile,address,create_time from customer where user_id= ?', [ userId ]);
     return result;
@@ -32,7 +32,7 @@ class CustomerService extends Service {
   }
   async timeLine(userId) { // 顾客时间线核心函数
     const result = [];
-    const customerList = await this.query('', userId);
+    const customerList = await this.query(userId);
     for (const customer of customerList) {
       const nodes = [];
       const node = { timer: '', desc: '' };

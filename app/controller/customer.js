@@ -9,7 +9,7 @@ class CustomerController extends Controller {
     this.ctx.encapsulateQuery(result);
   }
   async add() {
-    const { ctx, service, app } = this;
+    const { ctx, service } = this;
     const user_id = this.ctx.session.userId;
     const body = Object.assign({ user_id }, ctx.request.body);
     const result = await service.customer.add(body);

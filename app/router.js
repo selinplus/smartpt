@@ -19,5 +19,5 @@ module.exports = app => {
   app.get('/dingtalk/init', app.controller.dingtalk.init);
   app.post('/dingtalk/authtalk', app.controller.dingtalk.authtalk);
   app.get('/dingtalk/mounted', app.controller.dingtalk.mounted);
-  // app.get('*', app.controller.home.index);
+  app.get('/init', app.controller.home.init);
 };

@@ -8,6 +8,10 @@ class HomeController extends Controller {
     console.log(_userId);
     await this.ctx.render('home.njk', { _username, _userId });
   }
+  async init() {
+    const url = this.ctx.request.protocol + '://' + this.ctx.request.host + this.ctx.request.originalUrl;
+    await this.ctx.render('init.njk', { url });
+  }
 }
 
 module.exports = HomeController;

@@ -46,7 +46,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon",
+    "start": "egg-scripts start --daemon --port=8091 --title=babycare-assist",
     "stop": "egg-scripts stop",
     "webpack-dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "dev": "egg-bin dev && cross-env NODE_ENV=development webpack-dev-server --hot",

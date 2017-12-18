@@ -4,19 +4,7 @@
             <Col span="10" class="brand"> simple ERP</Col>
             <Col span="8" offset="2" ><Avatar shape="square" icon="person" />{{username}}</Col>
             <Col span="3" offset="1">                
-                <Dropdown trigger="custom" :visible="visible" style="margin-left: 20px">
-                    <a href="javascript:void(0)" class="bell" @click="handleOpen">
-                        <Badge count="0">
-                            <Icon type="ios-bell-outline" size="26"></Icon>
-                        </Badge>
-                    </a>
-                    <DropdownMenu slot="list">
-                        <p class="drop-content"></p>
-                        <div style="text-align: right;margin:10px;">
-                            <Button type="primary" size="small" @click="handleClose">关闭</Button>
-                        </div>
-                    </DropdownMenu>
-                </Dropdown>
+                <router-link to="Product" active-class="current" class="tips" exact><Button type="ghost" shape="circle" icon="cube">产品</Button></router-link>
             </Col>
         </Row>
     </div>

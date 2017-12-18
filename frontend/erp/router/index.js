@@ -1,27 +1,28 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Start from 'cmp/start.vue';
-import Contact from 'cmp/contact.vue';
-import Vip from 'cmp/vip.vue';
-import OrderInfo from 'cmp/order-info.vue';
+import Sales from 'front/erp/erppage/sales.vue';
+import Contact from 'front/erp/erppage/contact.vue';
+import Purchase from 'front/erp/erppage/purchase.vue';
+import Stock from 'front/erp/erppage/stock.vue';
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      component: Start,
+      path: '/sales',
+      name: 'Sales',
+      component: Sales,
     },
     {
-      path: '/vip',
-      name: 'Vip',
-      component: Vip,
+      path: '/purchase',
+      name: 'Purchase',
+      component: Purchase,
     },
     {
-      path: '/my',
-      name: 'My',
-      component: OrderInfo,
+      path: '/stock',
+      name: 'Stock',
+      component: Stock,
     },
     {
       path: '/contact',

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import home from './home.vue';
+import ert from './ert.vue';
 import iView from 'iv/iview';
 // import 'iv/styles/iview.css';
 import router from './router';
@@ -13,7 +13,7 @@ Vue.use(BabyStore);
 
 new Vue({
   router,
-  render: h => h(home),
+  render: h => h(ert),
   created() {
     console.log(this.$baby);
   },

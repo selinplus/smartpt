@@ -10,9 +10,8 @@
     </div>
 </template>
 <script>
-import Customer from 'cmp/customer.vue';
-import PageHeader from 'cmp/page-header.vue';
-import PageFooter from 'cmp/page-footer.vue';
+import PageHeader from 'front/erp/erppage/component/page-header.vue';
+import PageFooter from 'front/erp/erppage/component/page-footer.vue';
 
 export default {
   name: 'app',

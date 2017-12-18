@@ -60,6 +60,7 @@ module.exports = {
       vue: 'vue/dist/vue',
       iv: 'iview/dist/',
       utils: path.resolve(__dirname, './utils'),
+      front: path.resolve(__dirname, './frontend/'),
       cmp: path.resolve(__dirname, './frontend/component/'),
       assets: path.resolve(__dirname, './app/public/static/'),
     },

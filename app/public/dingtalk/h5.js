@@ -37,7 +37,7 @@ dd.ready(function() {
         data: { event: 'user-getuserinfo', code: info.code },
         dataType: 'json',
         timeout: 900,
-        success(data, status, xhr) {
+        success:function(data, status, xhr) {
           const info = data;
           if (info.errcode === 0) {
             logger.i('龙韵软件');
@@ -49,7 +49,7 @@ dd.ready(function() {
             logger.e('auth error: ' + data);
           }
         },
-        error(xhr, errorType, error) {
+        error:function(xhr, errorType, error) {
           logger.e(errorType + ', ' + error);
         },
       });

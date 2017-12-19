@@ -26,11 +26,11 @@ dd.ready(function() {
   //     logger.e('fail: ' + JSON.stringify(err));
   //   },
   // });
-
+  logger.i('海纳百川，有容乃大！');
   dd.runtime.permission.requestAuthCode({
     corpId: corpId, // 企业id
     onSuccess(info) {
-      logger.i('欢迎使用龙韵软件.');
+      logger.i('海内存知己，天涯若比邻');
       $.ajax({
         url: '/dingtalk/authtalk/',
         type: 'POST',
@@ -40,7 +40,7 @@ dd.ready(function() {
         success(data, status, xhr) {
           const info = data;
           if (info.errcode === 0) {
-            logger.i('海内存知己，天涯若比邻');
+            logger.i('龙韵软件');
             dd.userid = info.userid;
             // 转向获取用户信息
             const u = '/dingtalk/mounted?userid=' + dd.userid;

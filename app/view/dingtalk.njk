@@ -7,6 +7,10 @@
   <title>dingtalk init </title>
 </head>
 <script>
+  window.onerror = function(message, url, lineNumber) {  
+    logger.e(message + ',LINE:' + lineNumber);
+    return true;
+  };  
   var agentId = '{{config.agentId}}';
   var corpId='{{config.corpId}}';
   var timeStamp = {{config.timeStamp}};
@@ -16,8 +20,9 @@
 <script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
 <style>
 body {
-  padding: 20px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #bfb8ce;
 }
 
 a {

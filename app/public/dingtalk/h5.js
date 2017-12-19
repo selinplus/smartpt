@@ -29,7 +29,7 @@ dd.ready(function() {
   logger.i('海纳百川，有容乃大！');
   dd.runtime.permission.requestAuthCode({
     corpId: corpId, // 企业id
-    onSuccess(info) {
+    onSuccess:function(info) {
       logger.i('海内存知己，天涯若比邻');
       $.ajax({
         url: '/dingtalk/authtalk/',
@@ -54,7 +54,7 @@ dd.ready(function() {
         },
       });
     },
-    onFail(err) {
+    onFail:function(err) {
       logger.e('requestAuthCode fail: ' + JSON.stringify(err));
     },
   });

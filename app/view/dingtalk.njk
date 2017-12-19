@@ -8,7 +8,7 @@
 </head>
 <script>
   window.onerror = function(message, url, lineNumber) {  
-    logger.e(message + ',LINE:' + lineNumber);
+    logger.e(message + ',URL:'+url+'LINE:' + lineNumber);
     return true;
   };  
   var agentId = '{{config.agentId}}';

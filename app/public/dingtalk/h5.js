@@ -18,14 +18,6 @@ dd.config({
 
 dd.userid = 0;
 dd.ready(function() {
-  // dd.runtime.info({
-  //   onSuccess(info) {
-  //     logger.i('runtime info: ' + JSON.stringify(info));
-  //   },
-  //   onFail(err) {
-  //     logger.e('fail: ' + JSON.stringify(err));
-  //   },
-  // });
   logger.i('海纳百川，有容乃大！');
   dd.runtime.permission.requestAuthCode({
     corpId: corpId, // 企业id

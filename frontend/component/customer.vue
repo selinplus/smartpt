@@ -1,7 +1,7 @@
 <template>
     <div class="picker">
         <Form :model="formItem" :label-width="80">
-            <FormItem label="姓名" class="inline">
+            <FormItem label="姓名(填选)" class="inline">
                  <Input v-model="formItem.name">
                     <span slot="prepend"><Icon type="person-stalker" color="#0C3C26"></Icon></span>
                     <Button slot="append" icon="grid" @click="customerModal = true"></Button>

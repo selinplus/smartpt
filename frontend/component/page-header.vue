@@ -1,8 +1,8 @@
 <template>
     <div class="header-bar">
         <Row class="header-row">
-            <Col span="10" class="brand"> SELIN Assist</Col>
-            <Col span="8" offset="2" ><Avatar shape="square" icon="person" />{{username}}</Col>
+            <Col span="10" class="brand"> BabyCare Assist</Col>
+            <Col span="8" offset="2" ><Avatar shape="square" icon="person" class="person-avatar" />{{username}}</Col>
             <Col span="3" offset="1">                
                 <Dropdown trigger="custom" :visible="visible" style="margin-left: 20px">
                     <a href="javascript:void(0)" class="bell" @click="handleOpen">
@@ -56,6 +56,9 @@
     }
     .brand{
         font-size: 16px;
+    }
+    .person-avatar{
+        color:blueviolet;
     }
     .bell{
         color:aliceblue;

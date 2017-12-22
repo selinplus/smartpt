@@ -3,10 +3,16 @@
         <Card style="width:99%">
             <p slot="title" class="card-header">
                 <Icon type="ios-information"></Icon>
-                现在，只需三步，即可完成订单!
+                三步，即可完成订单!
             </p>
-            <span slot="extra" @click="empty">
-                <Icon type="ios-loop-strong"></Icon>
+            <span slot="extra">
+                <Button size="small" type="ghost" @click="nextStep">
+                            {{textname}}
+                            <Icon type="chevron-right"></Icon>
+                </Button>
+                <Button size="small" type="ghost" @click="empty">
+                            重置
+                </Button>
             </span>
             <div class="container">
                 <Steps :current = "step">
@@ -15,17 +21,6 @@
                     <Step title="规划" content="规划食用方案"></Step>
                 </Steps>           
             </div>
-            <div class="btn-next-container">
-                <Row>
-                    <Col span="4" offset="18">
-                        <Button small type="ghost" shape="circle" @click="nextStep">
-                            {{textname}}
-                            <Icon type="chevron-right"></Icon>
-                        </Button>
-                    </Col>
-                </Row>             
-               
-            </div>  
             <div class="stepcomponent">
                 <transition mode="in-out" enter-active-class="slideInLeft", leave-active-class="slideOutRight">
                    <component :is="comarray[step]"></component>
@@ -108,6 +103,7 @@
             empty:function(){
                 this.$baby.clear();
                 this.step = 0;
+                this.textname='下一步';
             }
         }, 
         components:{ Customer, Product, Schedule},
@@ -117,6 +113,7 @@
 <style scoped>
 .content{
     padding: 2px;
+    height: 100%;
 }
 .hiddenme{
     display: none;

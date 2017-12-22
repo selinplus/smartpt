@@ -33,6 +33,9 @@ export default {
         bottom: 0px;
         z-index: 1000;
     }
+    .context{
+        height: 100%;
+    }
     .footer-row{
         margin: 8px;
     }

@@ -31,6 +31,7 @@
                     {
                         title: '产品',
                         key: 'name',
+                        className: 'product-name-col',
                     },
                     {
                         title: '数量',
@@ -177,6 +178,10 @@
 </script>
 
 <style scoped>
+.product-name-col{
+    min-width: 20px;
+    background-color: #fca190;
+}
 .list_product{
     min-height: 120px;
 }

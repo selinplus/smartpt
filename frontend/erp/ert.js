@@ -2,19 +2,15 @@ import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import ert from './ert.vue';
-import iView from 'iv/iview';
-// import 'iv/styles/iview.css';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 import router from './router';
-import BabyStore from './baby';
-import '../theme/index.less';
-Vue.use(iView);
-Vue.use(VueAxios, axios);
-Vue.use(BabyStore);
+import store from './store';
+Vue.use(Vuetify);
 
+Vue.use(VueAxios, axios);
 new Vue({
   router,
+  store,
   render: h => h(ert),
-  created() {
-    console.log(this.$baby);
-  },
 }).$mount('#main');

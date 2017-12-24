@@ -1,18 +1,26 @@
+import Vue from 'vue';
+import Vuex from 'vuex';
+import * as actions from './actions';
+import * as getters from './getters';
+import customer from './modules/customer';
+import products from './modules/products';
+import purchase from './modules/purchase';
+import sales from './modules/sales';
+import stock from './modules/stock';
 
-const BabyStore = {};
-BabyStore.install = function(Vue) {
-  Vue.prototype.$baby = {
-    summary: {},
-    customer: {},
-    products: [],
-    schedule: [],
-    clear() {
-      this.summary = {};
-      this.customer = {};
-      this.products = [];
-      this.schedule = [];
-    },
-  };
-};
+Vue.use(Vuex);
 
-module.exports = BabyStore;
+const debug = process.env.NODE_ENV !== 'production';
+
+export default new Vuex.Store({
+  actions,
+  getters,
+  modules: {
+    customer,
+    products,
+    purchase,
+    sales,
+    stock,
+  },
+  strict: debug,
+});

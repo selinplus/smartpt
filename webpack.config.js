@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const entry = { home: './frontend/home/home.js' };
+const entry = { home: './frontend/home/home.js', erp: './frontend/erp/ert.js' };
 module.exports = {
   entry,
   output: {

@@ -1,8 +1,8 @@
-import * as types from './mutation-types';
+import * as types from './mutations-type';
 
 export const addToCart = ({ commit }, product) => {
   if (product.inventory > 0) {
-    commit(types.ADD_TO_CART, {
+    commit(types.ADD_PRODUCT_REQUEST, {
       id: product.id,
     });
   }

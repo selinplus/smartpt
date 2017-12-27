@@ -20,4 +20,6 @@ module.exports = app => {
   app.post('/dingtalk/authtalk', app.controller.dingtalk.authtalk);
   app.get('/dingtalk/mounted', app.controller.dingtalk.mounted);
   app.get('/init', app.controller.home.init);
+  // erp according
+  app.get('/erp', app.controller.erp.index.index);
 };
